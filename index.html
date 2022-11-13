@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Garamante</title>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+</head>
+<body>
+<main>
+    <section class="mast">
+        <figure class="mast__bg" style="background-image:url(img/background-medium.jpg)"></figure>
+        <header class="mast__header container">
+            <div class="row w-100 vertical-center">
+                <div class="col-9">
+                    <h1 class="mast__title js-spanize">GARAMANTE.IT</h1>
+                    <hr class="sep"/>
+                    <p class="mast__text js-spanize">
+                        while (!succeed = try())
+                    </p>
+                </div>
+                <div class="col">
+                    <a>
+                        <span>></span><span>_</span><span> cd MathRevealer</span>
+                    </a>
+                </div>
+            </div>
+        </header>
+    </section>
+</main>
+</body>
+<script>
+    (function ($) {
+        let s,
+            spanizeLetters = {
+                settings: {
+                    letters: $('.js-spanize'),
+                },
+                init: function () {
+                    s = this.settings;
+                    this.bindEvents();
+                },
+                bindEvents: function () {
+                    s.letters.html(function (i, el) {
+                        //spanizeLetters.joinChars();
+                        let spanizer = $.trim(el).split("");
+                        return '<span>' + spanizer.join('</span><span>') + '</span>';
+                    });
+                },
+            };
+        spanizeLetters.init();
+    })(jQuery);
+</script>
+</html>
