@@ -37,6 +37,7 @@ a:active {
     font-weight: bold;
 }
 
+
 body {
     background-image:url(img/background-medium.jpg);
     background-repeat: no-repeat;
@@ -44,6 +45,7 @@ body {
     background-size: cover;
     background-position: center center;
     height: 100vh;
+    background-color: #181818;
 }
 
 footer {
