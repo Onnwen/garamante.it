@@ -4,7 +4,7 @@
 
 a, a:visited, a:link {
     font-family: "Cutive Mono", monospace;
-    font-size: 1.2em;
+    font-size: 20px;
     margin: 0 0 0.5em;
     line-height: 1.5;
     opacity: 0.75;
@@ -114,7 +114,7 @@ body {
 }
 .mast__title {
     font-family: "Cutive Mono", monospace;
-    font-size: 1em;
+    font-size: 20px;
     font-weight: 400;
     letter-spacing: 0.3em;
     text-transform: uppercase;
@@ -199,7 +199,7 @@ body {
 }
 .mast__text {
     font-family: "Cutive Mono", monospace;
-    font-size: 1em;
+    font-size: 16px;
     margin: 0 0 0.5em;
     line-height: 1.5;
     white-space: pre;
