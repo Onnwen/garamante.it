@@ -4,34 +4,117 @@
     <meta charset="UTF-8">
     <title>Garamante</title>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <link rel="stylesheet" href="./stylesheet.css">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="stylesheet" href="./stylesheet.css">
 </head>
 <body>
 <main>
-    <section class="mast">
-        <figure class="mast__bg" style="background-image:url(img/background-medium.jpg)"></figure>
-        <header class="mast__header container">
-            <div class="row w-100 vertical-center">
-                <div class="col-9">
-                    <h1 class="mast__title js-spanize">GARAMANTE.IT</h1>
-                    <hr class="sep"/>
-                    <p class="mast__text js-spanize">
-                        while (!succeed = try())
-                    </p>
+    <div id="horizontal">
+        <section class="mast">
+            <header class="mast__header" style="height: 92vh;">
+                <div class="row w-100 vertical-center">
+                    <div class="col-4 text-center align-items-center" style="margin-top: auto; margin-bottom: auto;">
+                        <h1 class="mast__title js-spanize">GARAMANTE.IT</h1>
+                        <hr class="sep" style=" margin-left: auto; margin-right: auto; width: 250px"/>
+                        <p class="mast__text js-spanize">
+                            while (!succeed = try())
+                        </p>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4 text-center" style="margin-top: auto; margin-bottom: auto;">
+                        <ul>
+                            <li>
+                                <a href="https://garamante.it/mathrevealer">
+                                    <span>></span><span>_</span><span> cd MathRevealer</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="col">
-                    <a>
-                        <span>></span><span>_</span><span> cd MathRevealer</span>
-                    </a>
-                </div>
+            </header>
+        </section>
+        <footer>
+            <div class="text-center">
+                <a href="https://twitter.com/OnnwenC" class="mx-3">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="https://github.com/Onnwen" class="mx-3">
+                    <i class="bi bi-github mx-2"></i>
+                </a>
+                <a href="https://www.instagram.com/onnwencassitto/" class="mx-3">
+                    <i class="bi bi-instagram"></i>
+                </a>
             </div>
-        </header>
-    </section>
+        </footer>
+    </div>
+    <div id="vertical">
+        <section class="mast">
+            <header class="mast__header" style="height: 93vh;">
+                <div class="row w-100" style="height: 30vh;">
+                    <div class="text-center align-items-center" style="margin-top: auto; margin-bottom: auto;">
+                        <h1 class="mast__title js-spanize">GARAMANTE.IT</h1>
+                        <hr class="sep" style=" margin-left: auto; margin-right: auto; width: 250px"/>
+                        <p class="mast__text js-spanize">
+                            while (!succeed = try())
+                        </p>
+                    </div>
+                </div>
+                <div class="row w-100" style="height: 35vh;">
+                    <div class="text-center">
+                    </div>
+                </div>
+                <div class="row w-100" style="height: 30vh;">
+                    <div class="text-center align-items-center" style="margin-top: auto; margin-bottom: auto;">
+                        <ul style="margin-right: 0;">
+                            <li>
+                                <a href="https://garamante.it/mathrevealer">
+                                    <span>></span><span>_</span><span> cd MathRevealer</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+        </section>
+        <footer style="height: 1vh;">
+            <div class="text-center">
+                <a href="https://twitter.com/OnnwenC" class="mx-3">
+                    <i class="bi bi-twitter"></i>
+                </a>
+                <a href="https://github.com/Onnwen" class="mx-3">
+                    <i class="bi bi-github mx-2"></i>
+                </a>
+                <a href="https://www.instagram.com/onnwencassitto/" class="mx-3">
+                    <i class="bi bi-instagram"></i>
+                </a>
+            </div>
+        </footer>
+    </div>
 </main>
 </body>
 <script>
+    $( document ).ready(function() {
+        updateOrientation();
+    });
+
+    $( window ).resize(function() {
+        updateOrientation();
+    });
+
+    function updateOrientation() {
+        if (window.innerHeight + 50 > window.innerWidth) {
+            $("#horizontal").hide();
+            $("#vertical").show();
+        }
+        else {
+            $("#vertical").hide();
+            $("#horizontal").show();
+        }
+    }
+
     (function ($) {
         let s,
             spanizeLetters = {
