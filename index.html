@@ -98,6 +98,7 @@
 <script>
     $( document ).ready(function() {
         updateOrientation();
+        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
     });
 
     $( window ).resize(function() {
