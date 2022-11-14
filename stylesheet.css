@@ -1,3 +1,17 @@
+.mast__title {
+    font-family: "Prompt", sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+}
+.mast__text {
+    font-family: "Prompt", sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    margin: 0 0 0.5em;
+    line-height: 1.5;
+    white-space: pre;
+}
+
 *, *:before, *:after {
     box-sizing: border-box;
 }
@@ -56,12 +70,13 @@ footer {
 ul {
     list-style:none;
     padding:0;
-    margin: 0 40px 0 0;
+    margin: 0 0 0 150px;
+    text-align: left;
 }
 
 li {
-    margin-bottom: 50px;
-    margin-top: 50px;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .vertical-center {
@@ -75,7 +90,6 @@ body {
     margin: 0;
     width: 100%;
     height: 100vh;
-    font-family: "Cutive Mono", monospace;
     line-height: 1.5;
     font-weight: 400;
     font-style: normal;
@@ -113,13 +127,6 @@ body {
     padding: 0;
     background-size: cover;
     background-position: 50%;
-}
-.mast__title {
-    font-family: "Cutive Mono", monospace;
-    font-size: 20px;
-    font-weight: 400;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
 }
 .mast__title span {
     animation: letter-glow 0.7s 0s ease both;
@@ -198,13 +205,6 @@ body {
 }
 .mast__title span:nth-child(25) {
     animation-delay: 1.25s;
-}
-.mast__text {
-    font-family: "Cutive Mono", monospace;
-    font-size: 16px;
-    margin: 0 0 0.5em;
-    line-height: 1.5;
-    white-space: pre;
 }
 .mast__text span {
     animation: letter-glow 0.7s 0s ease both;
@@ -774,6 +774,6 @@ body {
     }
     100% {
         width: 275px;
-        opacity: 0.75;
+        opacity: 0.4;
     }
 }
