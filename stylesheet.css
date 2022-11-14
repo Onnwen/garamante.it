@@ -87,10 +87,11 @@ body {
 }
 .sep {
     border: 0;
-    width: 60px;
+    width: 75px;
     height: 1px;
     margin: 1em 0;
     background-color: rgba(255, 255, 255, 0.6);
+    animation: opacity 2s ease-in-out both;
 }
 .mast {
     position: relative;
@@ -763,5 +764,16 @@ body {
     100% {
         opacity: 0.8;
         text-shadow: 0px 0px 20px rgba(255, 255, 255, 0.0);
+    }
+}
+
+@keyframes opacity {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    100% {
+        width: 275px;
+        opacity: 0.75;
     }
 }
