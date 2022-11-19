@@ -5,7 +5,91 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garamante | 404</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./stylesheet.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap');
+        h1 {
+            font-family: "Prompt", sans-serif;
+            font-weight: 400;
+            font-size: 26px;
+        }
+
+        *, *:before, *:after {
+            box-sizing: border-box;
+        }
+
+        p {
+            font-family: "Prompt", sans-serif;
+            font-weight: 100;
+            font-size: 18px;
+            margin: 0 0 0;
+            line-height: 1.5;
+            white-space: pre;
+        }
+
+        .opacity-appear {
+            animation: dissolve 2s ease-in-out both;
+        }
+
+        .scale-big-appear {
+            animation: scale-big 2s ease-in-out both;
+        }
+
+        @keyframes dissolve {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes scale-big {
+            0% {
+                opacity: 0;
+                font-size: 100px;
+                font-weight: 600;
+            }
+            100% {
+                opacity: 1;
+                font-size: 125px;
+                font-weight: 600;
+            }
+        }
+
+        body {
+            background-image:url(img/background2-medium-webp.webp);
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center center;
+            height: 100vh;
+            background-color: #000000;
+        }
+
+        a, a:visited, a:link {
+            font-family: "Cutive Mono", monospace;
+            margin: 0 0 0.5em;
+            line-height: 1.5;
+            opacity: 0.85;
+            transition: opacity .2s ease-in-out, text-shadow .2s ease-in-out;
+            font-weight: 100;
+            color: inherit;
+            text-decoration: none;
+            font-size: 13px
+        }
+
+        a:active {
+            opacity: 0.8;
+            font-weight: bold;
+        }
+
+        a:hover {
+            opacity: 1;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
+            animation: none;
+            color: white;
+        }
+    </style>
 </head>
 <body style="background-image: none">
 <div class="h-100 d-flex align-items-center justify-content-center">
@@ -13,8 +97,8 @@
         <h1 class="scale-big-appear">404</h1>
         <p class="opacity-appear">sun has set, the page is out of domain</p>
     </div>
-    <footer class="fixed-bottom text-center">
-        <a style="font-size: 13px" href="https://garamante.it">>_ cd garamante.it</a>
+    <footer class="fixed-bottom text-center mb-4">
+        <a href="https://garamante.it">>_ cd garamante.it</a>
     </footer>
 </div>
 </body>
