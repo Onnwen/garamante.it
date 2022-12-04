@@ -27,17 +27,14 @@
 
 <!-- Dashboard -->
 <div id="dashboard" style="width: 100vw;">
-    <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
+    <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left text-truncate" id="show-side-navigation1">
         <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
-        <ul class="categories list-unstyled mt-5">
+        <ul class="categories list-unstyled mt-5" id="pages-list">
             <li class="">
-                <i class="bi bi-house"></i><a onclick="selectSection(1)" class="sidebar-button section-button sidebar-button-active" id="section-button-1"> Dashboard</a>
+                <i class="bi bi-house-fill"></i><a onclick="selectSection('dashboard')" class="sidebar-button section-button sidebar-button-active" id="section-button-dashboard"> Dashboard</a>
             </li>
             <li class="">
-                <i class="bi bi-archive-fill"></i><a onclick="selectSection(2)" class="sidebar-button section-button" id="section-button-2"> Pagine</a>
-            </li>
-            <li class="">
-                <i class="bi bi-clipboard-data-fill"></i><a onclick="selectSection(3)" class="sidebar-button section-button" id="section-button-3"> Statistiche</a>
+                <i class="bi bi-clipboard-data-fill"></i><a onclick="selectSection('stats')" class="sidebar-button section-button" id="section-button-stats"> Statistiche</a>
             </li>
         </ul>
     </aside>
@@ -66,15 +63,15 @@
             </div>
         </nav>
 
-        <div class="p-4 container-fluid">
+        <div class="p-4 container-fluid" id="sections">
             <div class="welcome mb-5">
                 <div class="content rounded-3 p-3">
-                    <h1 class="fs-3">garamante.it</h1>
-                    <p class="mb-0">Pannello di gestione</p>
+                    <h1 class="fs-3" id="section-title">garamante.it</h1>
+                    <p class="mb-0" id="section-description">Pannello di gestione</p>
                 </div>
             </div>
 
-            <section class="admins mt-4 w-100 section" id="section-1">
+            <section class="admins mt-4 w-100 section" id="section-dashboard">
                 <p class="section-title">GESTIONE CONTENUTI</p>
                 <div class="row row-cols-2">
                     <div class="box">
@@ -126,36 +123,17 @@
                 </div>
             </section>
 
-            <section class="admins mt-4 w-100 section" id="section-2">
-                <p class="section-title mt-4">GESTIONE</p>
+            <section class="admins mt-4 w-100 section" id="section-stats">
+                <p class="section-title">STATISTICHE</p>
                 <div class="row row-cols-1">
                     <div class="box">
-                        <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
-                            <i class="bi bi-file-earmark-plus-fill widget-button-icon"></i>
+                        <div class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-graph-up-arrow widget-button-icon"></i>
                             <div class="ms-3">
-                                <h3 class="fs-5 mb-1">Nuova pagina</h3>
-                                <p class="mb-0">Crea una nuova pagina</p>
+                                <h3 class="fs-5 mb-1">Nessun dato</h3>
+                                <p class="mb-0">Nessuna statistica attualmente disponibile</p>
                             </div>
-                        </button>
-                    </div>
-                </div>
-                <p class="section-title mt-4">PAGINE</p>
-                <div class="row row-cols-2">
-                    <div class="box">
-                        <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
-                            <i class="bi bi-file-earmark-fill widget-button-icon"></i>
-                            <div class="ms-3">
-                                <h3 class="fs-5 mb-1">MathRevealer</h3>
-                            </div>
-                        </button>
-                    </div>
-                    <div class="box">
-                        <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
-                            <i class="bi bi-file-earmark-fill widget-button-icon"></i>
-                            <div class="ms-3">
-                                <h3 class="fs-5 mb-1">Garamante Bank</h3>
-                            </div>
-                        </button>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -164,6 +142,8 @@
 </div>
 
 <script>
+    let pages = [];
+
     $("#loginForm").on("submit", function (event) {
         event.preventDefault();
         $.post("api/login.php", {
@@ -194,21 +174,82 @@
         //     window.location.href = "admin.html";
         // }
         $("#loading").hide();
-        selectSection(1);
+        selectSection("dashboard");
+        loadPages();
     });
 
-    function selectSection(id) {
+    function loadPages() {
+        $.get("api/get/pages.php")
+            .done(function (data) {
+                pages = JSON.parse(data);
+                pages.forEach((page, index) => {
+                    $("#pages-list").append(
+                        '<li class="">\n' +
+                        '<i class="bi ' + (page.icon_name != null ? page.icon_name : "bi-file-earmark-fill") + '"></i><a onclick="selectSection(' + index + ')" class="sidebar-button section-button" id="section-button-' + index + '"> ' + page.name + '</a>\n' +
+                        '</li>');
+
+                    $("#sections").append(`
+                        <section class="admins mt-4 w-100 section" id="section-${index}">
+                            <p class="section-title">GESTIONE</p>
+                            <div class="row row-cols-2">
+                                <div class="box">
+                                    <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                                        <i class="bi bi-arrow-clockwise widget-button-icon"></i>
+                                        <div class="ms-3">
+                                            <h3 class="fs-5 mb-1">Aggiorna</h3>
+                                            <p class="mb-0">Ultimo pull eseguito 12 giorni fa</p>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div class="box">
+                                    <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                                        <i class="bi bi-pencil-square widget-button-icon"></i>
+                                        <div class="ms-3">
+                                            <h3 class="fs-5 mb-1">Modifica</h3>
+                                            <p class="mb-0">Ultima modifica effetuata 8 ore fa</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <p class="section-title mt-4">CRONOLOGIA EVENTI</p>
+                            <div class="row row-cols-1">
+                                <div class="box">
+                                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                                        <i class="bi bi-calendar-week-fill widget-button-icon"></i>
+                                        <div class="ms-3">
+                                            <h3 class="fs-5 mb-1">Nessun evento recente</h3>
+                                            <p class="mb-0">Non sono stati registrati eventi recenti</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>`);
+
+                    selectSection("dashboard");
+                })
+            });
+    }
+
+    function selectSection(name) {
         $(".section-button").each(function () {
             $(this).removeClass("sidebar-button-active");
         });
-
-        $("#section-button-" + id).addClass("sidebar-button-active");
+        $("#section-button-" + name).addClass("sidebar-button-active");
 
         $(".section").each(function () {
             $(this).hide();
         });
+        $("#section-" + name).show();
 
-        $("#section-" + id).show();
+        if (isNaN(name)) {
+            $("#section-title").text("garamante.it");
+            $("#section-description").text("Pannello di controllo");
+        }
+        else {
+            $("#section-title").text(pages[name].url);
+            $("#section-description").text("Gestione della pagina " +  pages[name].name);
+        }
     }
 </script>
 </body>
