@@ -146,7 +146,7 @@
 
     $("#loginForm").on("submit", function (event) {
         event.preventDefault();
-        $.post("api/login.php", {
+        $.post("./api/login.php", {
             username: $("#emailField").val(),
             hashed_password: $("#passwordField").val()
         })
@@ -179,7 +179,7 @@
     });
 
     function loadPages() {
-        $.get("api/get/pages.php")
+        $.get("./api/get/pages.php")
             .done(function (data) {
                 pages = JSON.parse(data);
                 pages.forEach((page, index) => {
