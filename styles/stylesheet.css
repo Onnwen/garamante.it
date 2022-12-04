@@ -1,0 +1,143 @@
+h1 {
+    font-family: "Prompt", sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+}
+* {
+    font-family: "Prompt", sans-serif;
+    font-weight: 100;
+    font-size: 18px;
+}
+
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: black !important;
+    border-color: black !important;
+}
+
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+a, a:visited, a:link {
+    text-decoration: none;
+}
+
+.code-style-link, .code-style-link:visited, .code-style-link:link {
+    font-family: "Cutive Mono", monospace;
+    font-size: 18px;
+    margin: 0 0 0.5em;
+    line-height: 1.5;
+    font-weight: 100;
+    color: inherit;
+}
+
+
+.blink {
+    animation: blink 1s step-start 0s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0.0;
+    }
+}
+
+.footer-text {
+    color: rgb(218, 218, 218);
+    font-size: 14px;
+}
+
+
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center center;
+    height: 100vh;
+    background-color: #000000;
+}
+
+footer {
+    color: white;
+    height: 8vh;
+}
+
+ul {
+    list-style:none;
+    padding:0;
+    margin: 0 0 0 0;
+}
+
+li {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    line-height: 1.5;
+    font-weight: 400;
+    font-style: normal;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+.sep {
+    border: 0;
+    height: 1px;
+    margin: 1em 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    animation: opacity 2s ease-in-out both;
+}
+.opacity-appear {
+    animation: dissolve 2s ease-in-out both;
+}
+.scale-big-appear {
+    animation: scale-big 2s ease-in-out both;
+}
+
+@keyframes opacity {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    100% {
+        width: 225px;
+        opacity: 0.4;
+    }
+}
+
+@keyframes dissolve {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0.8;
+    }
+}
+
+@keyframes scale-big {
+    0% {
+        opacity: 0;
+        font-size: 100px;
+        font-weight: 600;
+    }
+    100% {
+        opacity: 1;
+        font-size: 125px;
+        font-weight: 600;
+    }
+}
