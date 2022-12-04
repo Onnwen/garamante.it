@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garamante | Pannello di controllo</title>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="./node_modules/jquery.session/jquery.session.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css" media="print" onload="this.media='all'">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="stylesheet" href="styles/stylesheet.css">
+    <link rel="stylesheet" href="styles/dashboard_stylesheet.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap');
+    </style>
+</head>
+
+<body style="background-color: black; height: 100vh; width: 100vw;" class="d-flex justify-content-center">
+<!-- Loading div -->
+<div id="loading" class="vertical-center">
+    <div class="spinner-border text-light" role="status">
+        <span class="sr-only"></span>
+    </div>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" style="width: 100vw;">
+    <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left" id="show-side-navigation1">
+        <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
+        <ul class="categories list-unstyled mt-5">
+            <li class="">
+                <i class="bi bi-house"></i><a onclick="selectSection(1)" class="sidebar-button section-button sidebar-button-active" id="section-button-1"> Dashboard</a>
+            </li>
+            <li class="">
+                <i class="bi bi-archive-fill"></i><a onclick="selectSection(2)" class="sidebar-button section-button" id="section-button-2"> Pagine</a>
+            </li>
+            <li class="">
+                <i class="bi bi-clipboard-data-fill"></i><a onclick="selectSection(3)" class="sidebar-button section-button" id="section-button-3"> Statistiche</a>
+            </li>
+        </ul>
+    </aside>
+
+    <section id="wrapper">
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid mx-2">
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="uil-bars text-white"></i>
+                    </button>
+                    <div class="navbar-brand" href="#">garamante<span class="main-color" style="font-size: 16px; font-weight: 400">CMS</span></div>
+                </div>
+                <div class="collapse navbar-collapse" id="toggle-navbar">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Onnwen Cassitto
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Esci</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="p-4 container-fluid">
+            <div class="welcome mb-5">
+                <div class="content rounded-3 p-3">
+                    <h1 class="fs-3">garamante.it</h1>
+                    <p class="mb-0">Pannello di gestione</p>
+                </div>
+            </div>
+
+            <section class="admins mt-4 w-100 section" id="section-1">
+                <p class="section-title">GESTIONE CONTENUTI</p>
+                <div class="row row-cols-2">
+                    <div class="box">
+                        <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-file-earmark-plus-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Nuova pagina</h3>
+                                <p class="mb-0">Crea una nuova pagina</p>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="box">
+                        <button onclick="selectSection(2)" class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-file-earmark-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Vedi pagine</h3>
+                                <p class="mb-0">Vedi tutte le pagine</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="section-title mt-4">COLLEGAMENTI UTILI</p>
+                <div class="row row-cols-3">
+                    <div class="box">
+                        <a href="https://lightsail.aws.amazon.com/ls/webapp/eu-west-3/instances/Garamante/connect" target="_blank" class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-hdd-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Server</h3>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box">
+                        <a href="https://my.ionos.it/domain-details/garamante.it" target="_blank" class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-keyboard-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Dominio</h3>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="box">
+                        <a href="https://dash.cloudflare.com/186760dcdaa6367ddf38130cca8f7be4/garamante.it" target="_blank" class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-server widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">DNS</h3>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="admins mt-4 w-100 section" id="section-2">
+                <p class="section-title mt-4">GESTIONE</p>
+                <div class="row row-cols-1">
+                    <div class="box">
+                        <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-file-earmark-plus-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Nuova pagina</h3>
+                                <p class="mb-0">Crea una nuova pagina</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <p class="section-title mt-4">PAGINE</p>
+                <div class="row row-cols-2">
+                    <div class="box">
+                        <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-file-earmark-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">MathRevealer</h3>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="box">
+                        <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-file-earmark-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Garamante Bank</h3>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>
+
+<script>
+    $("#loginForm").on("submit", function (event) {
+        event.preventDefault();
+        $.post("api/login.php", {
+            username: $("#emailField").val(),
+            hashed_password: $("#passwordField").val()
+        })
+            .done(function (data) {
+                let userInfo = JSON.parse(data);
+                if (userInfo.user_id != null) {
+                    $.session.set("user_id", userInfo.user_id);
+                    $.session.set("username", userInfo.username);
+                    $.session.set("email", userInfo.email);
+                    $.session.set("firstName", userInfo.firstName);
+                    $.session.set("lastName", userInfo.lastName);
+                    window.location.href = "dashboard.html";
+                } else {
+                    $("#emailField").addClass("is-invalid");
+                    $("#passwordField").addClass("is-invalid");
+                    alert("Credenziali errate");
+                }
+            });
+    });
+
+    $(document).ready(function () {
+        // if ($.session.get("user_id") != null) {
+        //     $("#loading").hide();
+        // } else {
+        //     window.location.href = "admin.html";
+        // }
+        $("#loading").hide();
+        selectSection(1);
+    });
+
+    function selectSection(id) {
+        $(".section-button").each(function () {
+            $(this).removeClass("sidebar-button-active");
+        });
+
+        $("#section-button-" + id).addClass("sidebar-button-active");
+
+        $(".section").each(function () {
+            $(this).hide();
+        });
+
+        $("#section-" + id).show();
+    }
+</script>
+</body>
+
+</html>
