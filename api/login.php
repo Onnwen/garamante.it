@@ -11,10 +11,9 @@ $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($user && password_verify($password, $user['hashed_password'])) {
-    $logSql = "INSERT INTO users_connection (user_id, date, ip, country) VALUES (:user_id, :date, :ip, :country)";
+    $logSql = "INSERT INTO users_connection (user_id, ip, country) VALUES (:user_id, :ip, :country)";
     $stmt = $pdo->prepare($logSql);
     $stmt->bindParam(':user_id', $user['id']);
-    $stmt->bindParam(':date', date('Y-m-d H:i:s'));
     $stmt->bindParam(':ip', $_SERVER['HTTP_CF_CONNECTING_IP']);
     $stmt->bindParam(':country', $_SERVER['HTTP_CF_IPCOUNTRY']);
     $stmt->execute();
