@@ -1,2 +1,2 @@
 <?php
-echo "WORKING!";
+echo date('Y-m-d H:i:s');
