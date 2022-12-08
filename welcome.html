@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garamante</title>
+    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css" media="print" onload="this.media='all'">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.ico">
+    <link rel="stylesheet" href="styles/stylesheet.css">
+    <link rel="stylesheet" href="styles/index_stylesheet.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap');
+    </style>
+</head>
+<body>
+<main>
+    <div id="horizontal">
+        <section class="mast">
+            <header class="mast__header" style="height: 92vh;">
+                <div class="row w-100 vertical-center">
+                    <div class="col-4 text-center align-items-center" style="margin-top: auto; margin-bottom: auto;">
+                        <h1 class="mast__title js-spanize">garamante.it</h1>
+                        <hr class="sep" style=" margin-left: auto; margin-right: auto; width: 250px"/>
+                        <p class="mast__text js-spanize">
+                            derivative is like sunset
+                        </p>
+                    </div>
+                    <div class="col-4">
+                    </div>
+                    <div class="col-4 text-center" style="margin-top: auto; margin-bottom: auto;">
+                        <ul>
+<!--                            <li>-->
+<!--                                <a class="code-style-link" href="portfolio.html">-->
+<!--                                    <span>Portfolio</span>-->
+<!--                                </a>-->
+<!--                            </li>-->
+                            <li>
+                                <a class="code-style-link" href="https://mathrevealer.garamante.it/">
+                                    <span>MathRevealer</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            <div style="height: 8vh;">
+                <div class="text-center">
+                    <a href="https://twitter.com/OnnwenC" class="mx-3 code-style-link">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="https://github.com/Onnwen" class="mx-3 code-style-link">
+                        <i class="bi bi-github mx-2"></i>
+                    </a>
+                    <a href="https://www.instagram.com/onnwencassitto/" class="mx-3 code-style-link">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div id="vertical">
+        <section class="mast">
+            <header class="mast__header" style="height: 93vh;">
+                <div class="row" style="height: 30vh;">
+                    <div class="text-center align-items-center" style="margin-top: auto; margin-bottom: auto;">
+                        <h1 class="mast__title js-spanize">garamante.it</h1>
+                        <hr class="sep" style=" margin-left: auto; margin-right: auto; width: 250px"/>
+                        <p class="mast__text js-spanize">
+                            derivative is like a sunset
+                        </p>
+                    </div>
+                </div>
+                <div class="row w-100" style="height: 35vh;">
+                    <div class="text-center">
+                    </div>
+                </div>
+                <div class="row w-100" style="height: 30vh;">
+                    <div class="text-center align-items-center" style="margin-top: auto; margin-bottom: auto;">
+                        <ul>
+                            <li>
+                                <a class="code-style-link" href="https://mathrevealer.garamante.it/">
+                                    <span>></span><span>_</span><span> cd MathRevealer</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a class="code-style-link" href="https://bank.garamante.it/">
+                                    <span>></span><span>_</span><span> cd GaramanteBank</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            <div style="height: 8vh;">
+                <div class="text-center">
+                    <a href="https://twitter.com/OnnwenC" class="mx-3 code-style-link">
+                        <i class="bi bi-twitter"></i>
+                    </a>
+                    <a href="https://github.com/Onnwen" class="mx-3 code-style-link">
+                        <i class="bi bi-github mx-2"></i>
+                    </a>
+                    <a href="https://www.instagram.com/onnwencassitto/" class="mx-3 code-style-link">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+<script>
+    $( document ).ready(function() {
+        updateOrientation();
+        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    });
+
+    $( window ).resize(function() {
+        updateOrientation();
+    });
+
+    function updateOrientation() {
+        if (window.innerHeight + 50 > window.innerWidth) {
+            $("#horizontal").hide();
+            $("#vertical").show();
+        }
+        else {
+            $("#vertical").hide();
+            $("#horizontal").show();
+        }
+    }
+
+    (function ($) {
+        let s,
+            spanizeLetters = {
+                settings: {
+                    letters: $('.js-spanize'),
+                },
+                init: function () {
+                    s = this.settings;
+                    this.bindEvents();
+                },
+                bindEvents: function () {
+                    s.letters.html(function (i, el) {
+                        //spanizeLetters.joinChars();
+                        let spanizer = $.trim(el).split("");
+                        return '<span>' + spanizer.join('</span><span>') + '</span>';
+                    });
+                },
+            };
+        spanizeLetters.init();
+    })(jQuery);
+</script>
+</html>

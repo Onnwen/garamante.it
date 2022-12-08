@@ -15,12 +15,31 @@
     --navbar-bg-color: #000000;
     --sidebar-bg-color: #000000;
     --sidebar-width: 250px;
+    --modal-content-bg: #171717;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+p {
+    color: var(--dk-gray-200);
+}
+
+.transparent-button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: var(--dk-gray-200);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gray-color {
+    color: rgba(255, 255, 255, 0.65);
 }
 
 .widget-button-icon {
@@ -268,7 +287,18 @@ body {
     color: var(--dk-gray-400)
 }
 
+td, th {
+    color: var(--dk-gray-400);
+    padding: 5px 10px;
+}
 
+th {
+    font-weight: 500;
+}
+
+tr:hover td {
+    opacity: 0.7;
+}
 
 
 /** --------------------------------

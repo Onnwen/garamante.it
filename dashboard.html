@@ -7,6 +7,7 @@
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/jquery.session/jquery.session.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="./js/dateUtility.js"></script>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css" media="print" onload="this.media='all'">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -18,6 +19,7 @@
 </head>
 
 <body style="background-color: black; height: 100vh; width: 100vw;" class="d-flex justify-content-center">
+
 <!-- Loading div -->
 <div id="loading" class="vertical-center">
     <div class="spinner-border text-light" role="status">
@@ -25,8 +27,28 @@
     </div>
 </div>
 
+<!-- Unlog modal -->
+<div class="modal fade" id="unlogModal" tabindex="-1" role="dialog" aria-labelledby="unlogModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="unlogModalLabel">Disconnessione</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Uscire da garamanteCMS?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+                <button type="button" class="btn btn-primary" id="unlogButton">Disconnetti</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Dashboard -->
-<div id="dashboard" style="width: 100vw;">
+<div id="dashboard" style="width: 100vw; display: none;">
     <aside class="sidebar position-fixed top-0 left-0 overflow-auto h-100 float-left text-truncate" id="show-side-navigation1">
         <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <ul class="categories list-unstyled mt-5" id="pages-list">
@@ -46,17 +68,18 @@
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="uil-bars text-white"></i>
                     </button>
-                    <div class="navbar-brand" href="#">garamante<span class="main-color" style="font-size: 16px; font-weight: 400">CMS</span></div>
+                    <div class="navbar-brand" href="#">garamante<span class="main-color" style="font-size: 16px; font-weight: 400">CMS</span>
+                    </div>
                 </div>
                 <div class="collapse navbar-collapse" id="toggle-navbar">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Onnwen Cassitto
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Esci</a></li>
-                            </ul>
+                        <li class="nav-item">
+                            <p id="username"></p>
+                        </li>
+                        <li class="nav-item ms-4">
+                            <button class="transparent-button gray-color" type="button" data-bs-toggle="modal" data-bs-target="#unlogModal">
+                                <i class="bi bi-box-arrow-right"></i>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -121,6 +144,14 @@
                         </a>
                     </div>
                 </div>
+
+                <p class="section-title mt-4">UTLIMI ACCESSI</p>
+                <div class="box">
+                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget">
+                        <table class="table" id="access_table">
+                        </table>
+                    </div>
+                </div>
             </section>
 
             <section class="admins mt-4 w-100 section" id="section-stats">
@@ -168,15 +199,55 @@
     });
 
     $(document).ready(function () {
-        // if ($.session.get("user_id") != null) {
-        //     $("#loading").hide();
-        // } else {
-        //     window.location.href = "admin.html";
-        // }
-        $("#loading").hide();
-        selectSection("dashboard");
-        loadPages();
+        if ($.session.get("user_id") !== undefined) {
+            showDashboard();
+            $("#username").text($.session.get("firstName") + " " + $.session.get("lastName"));
+
+            selectSection("dashboard");
+            loadPages();
+            loadAccess();
+        } else {
+            window.location.href = "admin.html";
+        }
     });
+
+    $("#unlogButton").on("click", function () {
+        $.session.clear();
+        window.location.href = "admin.html";
+    });
+
+    function showDashboard() {
+        $("#loading").hide();
+        $("#dashboard").show();
+    }
+
+    function loadAccess() {
+        $.get("./api/get/users_access.php", function (data) {
+            let access = JSON.parse(data);
+            let table = $("#access_table");
+            table.empty();
+            table.append(`
+                <thead>
+                    <tr>
+                        <th scope="col">Utente</th>
+                        <th scope="col">Data</th>
+                        <th scope="col">IP</th>
+                        <th scope="col">Località</th>
+                    </tr>
+                </thead>
+            `);
+            for (let i = 0; i < access.length; i++) {
+                table.append(`
+                    <tr>
+                        <td>${access[i].user_name}</td>
+                        <td>${dateIntervalToString(access[i].date)}</td>
+                        <td>${access[i].ip}</td>
+                        <td>${access[i].country}</td>
+                    </tr>
+                `);
+            }
+        });
+    }
 
     function loadPages() {
         $.get("./api/get/pages.php")
@@ -245,10 +316,9 @@
         if (isNaN(name)) {
             $("#section-title").text("garamante.it");
             $("#section-description").text("Pannello di controllo");
-        }
-        else {
+        } else {
             $("#section-title").text(pages[name].url);
-            $("#section-description").text("Gestione della pagina " +  pages[name].name);
+            $("#section-description").text("Gestione della pagina " + pages[name].name);
         }
     }
 </script>
