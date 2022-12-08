@@ -12,11 +12,11 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($user && password_verify($password, $user['hashed_password'])) {
     $logSql = "INSERT INTO users_connection (user_id, ip, country) VALUES (:user_id, :ip, :country)";
-    $stmt = $pdo->prepare($logSql);
-    $stmt->bindParam(':user_id', $user['id']);
-    $stmt->bindParam(':ip', $_SERVER['HTTP_CF_CONNECTING_IP']);
-    $stmt->bindParam(':country', $_SERVER['HTTP_CF_IPCOUNTRY']);
-    $stmt->execute();
+    $stmtLog = $pdo->prepare($logSql);
+    $stmtLog->bindParam(':user_id', $user['id']);
+    $stmtLog->bindParam(':ip', $_SERVER['HTTP_CF_CONNECTING_IP']);
+    $stmtLog->bindParam(':country', $_SERVER['HTTP_CF_IPCOUNTRY']);
+    $stmtLog->execute();
 
     $_SESSION['user_id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
