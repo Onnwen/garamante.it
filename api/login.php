@@ -11,7 +11,7 @@ $stmt->execute();
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($user && password_verify($password, $user['hashed_password'])) {
-    $logSql = "INSERT INTO users_connection (user_id, ip, country) VALUES (:user_id, :ip, :country)";
+    $logSql = "INSERT INTO users_connections (user_id, ip, country) VALUES (:user_id, :ip, :country)";
     $stmtLog = $pdo->prepare($logSql);
     $stmtLog->bindParam(':user_id', $user['id']);
     $stmtLog->bindParam(':ip', $_SERVER['HTTP_CF_CONNECTING_IP']);
