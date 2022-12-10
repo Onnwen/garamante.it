@@ -1,7 +1,7 @@
 h1 {
     font-family: Prompt, sans-serif;
-    font-weight: 300;
-    color: white;
+    font-weight: 400;
+    color: #ffffff;
     text-align: center;
 }
 
@@ -10,5 +10,49 @@ a:link, a:hover, a:visited, a:active {
 }
 
 body {
-    overflow: hidden;
+    /*overflow: hidden;*/
+}
+
+body.modal-open .supreme-container{
+    -webkit-filter: blur(10px);
+    -moz-filter: blur(10px);
+    -o-filter: blur(10px);
+    -ms-filter: blur(10px);
+    filter: blur(10px);
+}
+
+p {
+    color: white;
+    opacity: 0.8;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button, a {
+    opacity: 0.85;
+    transition: opacity .2s ease-in-out;
+}
+
+button:hover, a:hover {
+    opacity: 1;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.75);
+}
+
+.rel-div {
+    position: relative;
+}
+
+.inner-image {
+    position: absolute;
+    top: 25px;
+    right: 102px;
+    z-index: -1;
+    scale: 1;
+    transition: .5s ease-in-out;
+}
+
+.rel-div:hover .inner-image {
+    filter: alpha(opacity=50);
+    opacity: 0.85;
+    scale: 1.01;
 }

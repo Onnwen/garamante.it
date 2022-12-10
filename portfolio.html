@@ -5,17 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garamante | Progetti</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./styles/stylesheet.css">
     <link rel="stylesheet" href="styles/portfolio-stylesheet.css">
+    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap');
+
     </style>
 </head>
-<body style="background-image:url(img/portfolio-background.png);">
-<h1 class="mt-5" style="font-size: 30px !important;">surf on my works</h1>
 
-<footer class="fixed-bottom text-center">
+<body style="height: 100vh; background-color: black" class="body">
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content blur" style="background-color: rgba(0,0,0,0.25);">
+            <button type="button" class="btn align-self-end m-4" data-bs-dismiss="modal" aria-label="Close" style="color: white">
+                <i class="bi bi-x-lg"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="supreme-container" style="width: 100vw;">
+    <img src="img/portfolio-background.webp" alt="Logo" class="logo header-overlay" style="width: 100vw; height: auto">
+    <div class="text-center content-div" style="max-width: 850px; margin: 0 auto !important; float: none !important; ">
+        <div class="rel-div">
+            <img src="img/mac.png" alt="Logo" class="logo" style="width: 100%; height: auto" id="mac">
+            <img src="img/s1.png" alt="" class="inner-image" style="width: 76%; height: auto"/>
+        </div>
+        <h1 class="mt-4 text-center">
+            MathRevealer
+        </h1>
+        <p class="m-3 text-start align-self-center">
+            Un progetto nato in quinta superiore il cui obiettivo è letteralmente quello di <i>rivelare</i> il mondo della matematica e in particolare delle funzioni. Tramite potenti algoritmi interamente sviluppati da zero, MathRevealer è in grado di ottenere diverse informazioni sulla funzione inserita dall'utente, tra cui: dominio, segno, limiti, grafico e tanto altro.
+            <br>
+            <br>
+            MathRevealer punta a essere un vero e proprio strumento di studio per gli studenti di scuola superiore, in grado di fornire informazioni utili e dettagliate su ogni funzione. Inoltre, grazie a un'interfaccia intuitiva e semplice da usare, MathRevealer vuole essere un valido aiuto anche per chi ha difficoltà in matematica: <i>creato per chi ha difficoltà, da chi ha difficoltà.</i>
+            <br>
+            <br>
+            Il progetto è tutt'ora in sviluppo e si mira a una prima versione finale entro i primi mesi del 2023.
+        </p>
+        <div style="display: inline;">
+<!--            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                <i class="bi bi-plus-circle"></i>-->
+<!--            </a>-->
+            <a class="btn btn-primary mt-2" href="https://github.com/Onnwen/MathRevealer">
+                <i class="bi bi-github"></i>
+            </a>
+<!--            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+<!--                <i class="bi bi-arrow-down-circle"></i>-->
+<!--            </a>-->
+        </div>
+    </div>
+</div>
+<footer class="text-center mt-5">
     <a style="font-size: 13px" href="https://garamante.it">garamante.it</a>
 </footer>
-</body>
+</div>
 </html>
+
+<script>
+    $(window).scroll(function () {
+        let scrollTop = $(this).scrollTop();
+        $('.header-overlay').css('opacity', 1 - scrollTop / 500);
+        $('.content-div').css('opacity', scrollTop / 500 - 0.5);
+    });
+</script>

@@ -37,6 +37,11 @@
 <!--                                </a>-->
 <!--                            </li>-->
                             <li>
+                                <a class="code-style-link" href="https://garamante.it/portfolio">
+                                    <span>Portfolio</span>
+                                </a>
+                            </li>
+                            <li>
                                 <a class="code-style-link" href="https://mathrevealer.garamante.it/">
                                     <span>MathRevealer</span>
                                 </a>
@@ -114,7 +119,12 @@
     $( document ).ready(function() {
         updateOrientation();
         document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+        document.body.height = window.innerHeight;
     });
+
+    window.onresize = function() {
+        document.body.height = window.innerHeight;
+    }
 
     $( window ).resize(function() {
         updateOrientation();
