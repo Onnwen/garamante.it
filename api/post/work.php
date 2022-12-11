@@ -1,6 +1,8 @@
 <?php
 require_once('../connection.php');
 
+echo exec('whoami');
+
 $title = $_POST['title'] ?? '';
 $description = $_POST['description'] ?? '';
 $descriptionPreview = $_POST['descriptionPreview'] ?? '';
@@ -10,7 +12,7 @@ $cover = $_FILES["cover"];
 
 $target_dir_cover = "/var/www/html/Garamante-Website/contents/portfolio/covers/";
 
-$target_file_cover = $target_dir_cover . basename($cover["name"]);
+$target_file_cover = $target_dir_cover . $cover["name"];
 
 move_uploaded_file($cover["tmp_name"], $target_file_cover);
 
