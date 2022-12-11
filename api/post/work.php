@@ -8,11 +8,11 @@ $repository = $_POST['repository'] ?? '';
 $typeId = $_POST['typeId'] ?? '';
 $cover = $_FILES["cover"];
 
-$target_dir_cover = "../../contents/portfolio/cover/";
+$target_dir_cover = "/var/www/html/Garamante-Website/contents/portfolio/covers/";
 
 $target_file_cover = $target_dir_cover . $title;
 
-move_uploaded_file($cover["tmp_name"], getcwd() . "/../" . $target_file_cover);
+move_uploaded_file($cover["tmp_name"], $target_file_cover);
 
 $Query = "INSERT INTO Garamante.works (title, description_preview, description, type_id, cover_image_id, repository_url) VALUES (:title, :descriptionPreview, :description, :typeId, :coverImageUrl, :repositoryUrl);";
 try {
