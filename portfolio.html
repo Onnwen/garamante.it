@@ -64,7 +64,8 @@
 
     $(document).ready(function () {
         $.get("./api/get/works.php", function (data) {
-            JSON.parse(data).forEach(work => {
+            let works = JSON.parse(data);
+            works.forEach((work, index) => {
                 $("#content").append(`
                     <div class="text-center">
                         <h1 class="mb-4 text-center">
@@ -74,7 +75,7 @@
 <!--                            <img src="img/mac.png" alt="Logo" style="width: 100%; height: auto">-->
 <!--                            <img src="img/s1.png" alt="" class="inner-image-mac"/>-->
 <!--                        </div>-->
-                        <img src="https://garamante.it${work.cover_image_url}" alt="${work.title} cover image" style="width: 100%; height: auto">
+                        <img src="https://garamante.it${work.cover_image_url}" alt="${work.title} cover image" style="width: 100%; height: auto" class="mb-4 rounded-2">
                         <p class="text-start align-self-center">
                             ${work.description_preview}
                         </p>
@@ -82,15 +83,15 @@
                             <!--            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
                             <!--                <i class="bi bi-plus-circle"></i>-->
                             <!--            </a>-->
-                            <a class="btn btn-primary mt-2" href="${work.repository_url}">
-                                <i class="bi bi-github"></i>
-                            </a>
+                            <!-- <a class="btn btn-primary mt-2" href="">-->
+                            <!--    <i class="bi bi-github"></i>-->
+                            <!-- </a>-->
                             <!--            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
                             <!--                <i class="bi bi-arrow-down-circle"></i>-->
                             <!--            </a>-->
                         </div>
                     </div>
-                    <hr class="my-5" style="color: white">
+                   ${(index < works.length - 1 ? '<hr class="my-5 pb-4 pt-4" style="color: white">' : '')}
                 `);
             });
         });
