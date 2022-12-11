@@ -14,5 +14,5 @@ foreach ($works as $key => $work) {
     $works[$key]['description'] = urldecode($work['description']);
 }
 
-echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+echo json_encode($works);
 exit();
