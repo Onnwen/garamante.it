@@ -10,7 +10,7 @@ $cover = $_FILES["cover"];
 
 $target_dir_cover = "/var/www/html/Garamante-Website/contents/portfolio/covers/";
 
-$target_file_cover = $target_dir_cover . $cover["name"];
+$target_file_cover = $target_dir_cover . basename($cover["name"]);
 
 move_uploaded_file($cover["tmp_name"], $target_file_cover);
 
