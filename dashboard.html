@@ -46,6 +46,61 @@
     </div>
 </div>
 
+<!-- New portfolio project modal -->
+<div class="modal fade" id="portfolioProjectModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="portfolioProjectModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="portfolioProjectModalLabel">Aggiungi progetto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="basic-url" class="form-label">Informazioni generali</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="addNameLabel">Titolo</span>
+                        <input class="form-control" type="text" id="workTitle" aria-describedby="addNameLabel">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="addWorkRepositoryLabel">Repository</span>
+                        <input class="form-control" type="text" id="workRepository" aria-describedby="addNameLabel">
+                    </div>
+                    <select class="form-select w-100" aria-label="Default select example" id="workType">
+                        <option selected>Tipologia</option>
+                        <option value="1">Sito web</option>
+                        <option value="2">Applicazione mobile</option>
+                        <option value="3">Applicazione desktop</option>
+                        <option value="4">Relazione</option>
+                    </select>
+                    <br/>
+                    <label for="basic-url" class="form-label">Descrizione</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="addworkDescriptionLabel">Generale</span>
+                        <textarea class="form-control" type="text" id="workDescription" aria-describedby="addCompanyNotesLabel"></textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="addworkDescriptionPreviewLabel">Anteprima</span>
+                        <textarea class="form-control" type="text" id="workDescriptionPreview" aria-describedby="addCompanyNotesLabel"></textarea>
+                    </div>
+                    <br/>
+                    <div id="filesInput">
+                        <label for="basic-url" class="form-label">File</label>
+                        <div class="col">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="addCoverLabel">Copertina</span>
+                                <input class="form-control" type="file" id="workCover" aria-describedby="addPlanimetryLabel">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="portfolioProjectModalCloseButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                <button id="portfolioProjectModalConfirmButton" type="button" class="btn btn-success" onclick="addWork();">Aggiungi</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Dashboard -->
 <div id="dashboard" style="width: 100vw; display: none;">
@@ -57,6 +112,9 @@
             </li>
             <li class="">
                 <i class="bi bi-clipboard-data-fill"></i><a onclick="selectSection('stats')" class="sidebar-button section-button" id="section-button-stats"> Statistiche</a>
+            </li>
+            <li class="">
+                <i class="bi bi-briefcase-fill"></i><a onclick="selectSection('portfolio')" class="sidebar-button section-button" id="section-button-portfolio"> Portoflio</a>
             </li>
         </ul>
     </aside>
@@ -168,35 +226,35 @@
                     </div>
                 </div>
             </section>
+
+            <section class="admins mt-4 w-100 section" id="section-portfolio">
+                <p class="section-title">PORTFOLIO</p>
+                <div class="row row-cols-1">
+                    <div class="box">
+                        <button class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny" data-bs-toggle="modal" data-bs-target="#portfolioProjectModal">
+                            <i class="bi bi-file-earmark-plus-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Nuovo progetto</h3>
+                                <p class="mb-0">Aggiungi un nuovo progetto</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <p class="section-title mt-4">PROGETTI</p>
+                <div class="box">
+                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget">
+                        <table class="table" id="portfolio-works">
+                        </table>
+                    </div>
+                </div>
+            </section>
         </div>
     </section>
 </div>
 
 <script>
     let pages = [];
-
-    $("#loginForm").on("submit", function (event) {
-        event.preventDefault();
-        $.post("./api/login.php", {
-            username: $("#emailField").val(),
-            hashed_password: $("#passwordField").val()
-        })
-            .done(function (data) {
-                let userInfo = JSON.parse(data);
-                if (userInfo.user_id != null) {
-                    $.session.set("user_id", userInfo.user_id);
-                    $.session.set("username", userInfo.username);
-                    $.session.set("email", userInfo.email);
-                    $.session.set("firstName", userInfo.firstName);
-                    $.session.set("lastName", userInfo.lastName);
-                    window.location.href = "dashboard.html";
-                } else {
-                    $("#emailField").addClass("is-invalid");
-                    $("#passwordField").addClass("is-invalid");
-                    alert("Credenziali errate");
-                }
-            });
-    });
 
     $(document).ready(function () {
         if ($.session.get("user_id") !== undefined) {
@@ -243,6 +301,30 @@
                         <td>${dateIntervalToString(access[i].date)}</td>
                         <td>${access[i].ip}</td>
                         <td>${access[i].country}</td>
+                    </tr>
+                `);
+            }
+        });
+    }
+
+    function loadPortfolio() {
+        $.get("./api/get/works.php", function (data) {
+            let works = JSON.parse(data);
+            let table = $("#portfolio-works");
+            table.empty();
+            table.append(`
+                <thead>
+                    <tr>
+                        <th scope="col">Progetto</th>
+                        <th scope="col">Gestione</th>
+                    </tr>
+                </thead>
+            `);
+            for (let i = 0; i < works.length; i++) {
+                table.append(`
+                    <tr>
+                        <td>${works[i].title}</td>
+                        <td><button class="btn btn-primary m-1">Modifica</button></td>
                     </tr>
                 `);
             }
@@ -320,6 +402,38 @@
             $("#section-title").text(pages[name].url);
             $("#section-description").text("Gestione della pagina " + pages[name].name);
         }
+
+        if(name === "portfolio"){
+            loadPortfolio();
+        }
+    }
+
+    function addWork() {
+        let formData = new FormData();
+        formData.append("title", $("#workTitle").val());
+        formData.append("description", $("#workDescription").val());
+        formData.append("descriptionPreview", $("#workDescriptionPreview").val());
+        formData.append("repository", $("#workRepository").val());
+        formData.append("typeId", $("#workType").val());
+        formData.append("cover", $("#workCover").prop('files')[0]);
+
+        $.ajax({
+            url: "./api/post/work.php",
+            type: 'post',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(response){
+                // alert("Progetto aggiunto!");
+                // location.reload();
+            },
+            fail: function(){
+                alert("Errore: " + data);
+            },
+            always: function(){
+                $("#portfolioProjectModal").modal('hide');
+            }
+        });
     }
 </script>
 </body>

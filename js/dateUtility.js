@@ -7,9 +7,6 @@ function dateIntervalToString(d) {
     let value = elapsed
     let unit = "second";
 
-    console.log(date.getTime())
-    console.log(elapsed);
-
     if (elapsed > 31536000) {
         value = elapsed / 31536000;
         unit = "ann";
