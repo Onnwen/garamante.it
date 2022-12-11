@@ -8,7 +8,7 @@ $repository = $_POST['repository'] ?? '';
 $typeId = $_POST['typeId'] ?? '';
 $cover = $_FILES["cover"];
 
-$target_dir_cover = "/var/www/html/Garamante-Website/contents/portfolio/covers/";
+$target_dir_cover = "/contents/portfolio/covers/";
 
 $target_file_cover = $target_dir_cover . $title;
 
