@@ -14,7 +14,7 @@ $target_dir_cover = "/var/www/html/Garamante-Website/contents/portfolio/covers/"
 $target_file_cover = $target_dir_cover . $cover["name"];
 
 move_uploaded_file($cover["tmp_name"], $target_file_cover);
-$path = substr($target_file_cover, 33);
+$path = substr($target_file_cover, 31);
 
 try {
     $pdo->beginTransaction();
