@@ -27,11 +27,11 @@
 </div>
 
 <div class="supreme-container" style="width: 100vw;">
-    <div class="header">
+    <div class="header" id="header">
         <img alt="Logo" class="logo header-overlay responsive-full-width background-img mx-auto d-block">
     </div>
-    <div class="px-4" style="max-width: 850px; margin: 0 auto !important; float: none !important; ">
-        <div class="text-center content-div">
+    <div class="px-4" style="max-width: 850px; margin: 0 auto !important; float: none !important;" id="content">
+        <div class="text-center">
             <h1 class="mb-4 text-center">
                 MathRevealer
             </h1>
@@ -71,10 +71,25 @@
 </html>
 
 <script>
-    $(window).scroll(function () {
-        let scrollTop = $(this).scrollTop();
-        $('.header-overlay').css('opacity', 1 - scrollTop / 500);
-        $('.content-div').css('opacity', scrollTop / 500 - 0.5);
+    let lastScrollY = 0;
+    let isUpdating = false;
 
+    let header = document.getElementById('header');
+    let content = document.getElementById('content');
+
+    function fade(scroll_pos) {
+        header.style.opacity = 1 - scroll_pos / 500;
+        content.style.opacity = scroll_pos / 500 - 0.5;
+    }
+
+    window.addEventListener('scroll', function(e) {
+        lastScrollY = window.scrollY;
+        if (!isUpdating) {
+            window.requestAnimationFrame(function() {
+                fade(lastScrollY);
+                isUpdating = false;
+            });
+        }
+        isUpdating = true;
     });
 </script>
