@@ -15,21 +15,15 @@ $target_file_cover = $target_dir_cover . $cover["name"];
 
 move_uploaded_file($cover["tmp_name"], $target_file_cover);
 
-$Query = "INSERT INTO Garamante.works (title, description_preview, description, type_id, cover_image_id, repository_url) VALUES (:title, :descriptionPreview, :description, :typeId, :coverImageUrl, :repositoryUrl);";
 try {
-    $pre = $pdo->prepare($Query);
+    $pdo->beginTransaction();
+    $pdo->exec("INSERT INTO images (alias_text, url) VALUES ('$title' cover image, '$target_file_cover')");
+    $pdo->exec("INSERT INTO works (title, description, description_preview, repository_url, type_id, cover_image_id) VALUES ('$title', '$description', '$descriptionPreview', '$repository', '$typeId', LAST_INSERT_ID())");
+    $pdo->commit();
 } catch (Exception $e) {
+    $pdo->rollBack();
     echo $e->getMessage();
     exit;
 }
-
-$pre->bindParam(':title', $title);
-$pre->bindParam(':descriptionPreview', $descriptionPreview);
-$pre->bindParam(':description', $description);
-$pre->bindParam(':typeId', $typeId);
-$pre->bindParam(':coverImageUrl', $target_file_cover);
-$pre->bindParam(':repositoryUrl', $repository);
-
-$pre->execute();
 
 exit;
