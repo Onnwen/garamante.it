@@ -43,16 +43,7 @@ button:hover, a:hover {
     position: relative;
 }
 
-.inner-image {
-    position: absolute;
-    top: 25px;
-    right: 102px;
-    z-index: -1;
-    scale: 1;
-    transition: .5s ease-in-out;
-}
-
-.rel-div:hover .inner-image {
+.rel-div:hover .inner-image-mac {
     filter: alpha(opacity=50);
     opacity: 0.85;
     scale: 1.01;
@@ -66,6 +57,16 @@ button:hover, a:hover {
 
     .background-img {
         content: url("../img/portfolio-background.webp");
+    }
+
+    .inner-image-mac {
+        position: absolute;
+        top: 25px;
+        right: 102px;
+        z-index: -1;
+        scale: 1;
+        transition: .5s ease-in-out;
+        width: 76%; height: auto
     }
 }
 
@@ -94,5 +95,18 @@ button:hover, a:hover {
         left: -9999px;
         right: -9999px;
         margin: auto;
+    }
+
+    .inner-image-mac {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        z-index: -1;
+        scale: 1;
+        transition: .5s ease-in-out;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 50px;
+        padding-right: 50px;
     }
 }

@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./styles/stylesheet.css">
     <link rel="stylesheet" href="styles/portfolio-stylesheet.css">
-    <script src="./node_modules/jquery/dist/jquery.slim.min.js"></script>
+    <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap');
@@ -31,37 +31,6 @@
         <img alt="Logo" class="logo header-overlay responsive-full-width background-img mx-auto d-block">
     </div>
     <div class="px-4" style="max-width: 850px; margin: 0 auto !important; float: none !important;" id="content">
-        <div class="text-center">
-            <h1 class="mb-4 text-center">
-                MathRevealer
-            </h1>
-            <div class="rel-div mb-3" id="mac">
-                <img src="img/mac.png" alt="Logo" style="width: 100%; height: auto">
-                <img src="img/s1.png" alt="" class="inner-image" style="width: 76%; height: auto"/>
-            </div>
-            <p class="text-start align-self-center">
-                Un progetto nato in quinta superiore il cui obiettivo è letteralmente quello di
-                <i>rivelare</i> il mondo della matematica e in particolare delle funzioni. Tramite potenti algoritmi interamente sviluppati da zero, MathRevealer è in grado di ottenere diverse informazioni sulla funzione inserita dall'utente, tra cui: dominio, segno, limiti, grafico e tanto altro.
-                <br>
-                <br>
-                MathRevealer punta a essere un vero e proprio strumento di studio per gli studenti di scuola superiore, in grado di fornire informazioni utili e dettagliate su ogni funzione. Inoltre, grazie a un'interfaccia intuitiva e semplice da usare, MathRevealer vuole essere un valido aiuto anche per chi ha difficoltà in matematica:
-                <i>creato per chi ha difficoltà, da chi ha difficoltà.</i>
-                <br>
-                <br>
-                Il progetto è tutt'ora in sviluppo e si mira a una prima versione finale entro i primi mesi del 2023.
-            </p>
-            <div style="display: inline;">
-                <!--            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
-                <!--                <i class="bi bi-plus-circle"></i>-->
-                <!--            </a>-->
-                <a class="btn btn-primary mt-2" href="https://github.com/Onnwen/MathRevealer">
-                    <i class="bi bi-github"></i>
-                </a>
-                <!--            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
-                <!--                <i class="bi bi-arrow-down-circle"></i>-->
-                <!--            </a>-->
-            </div>
-        </div>
     </div>
     <footer class="text-center mt-5">
         <a style="font-size: 13px" href="https://garamante.it">garamante.it</a>
@@ -82,14 +51,48 @@
         content.style.opacity = scroll_pos / 500 - 0.5;
     }
 
-    window.addEventListener('scroll', function(e) {
+    window.addEventListener('scroll', function (e) {
         lastScrollY = window.scrollY;
         if (!isUpdating) {
-            window.requestAnimationFrame(function() {
+            window.requestAnimationFrame(function () {
                 fade(lastScrollY);
                 isUpdating = false;
             });
         }
         isUpdating = true;
+    });
+
+    $(document).ready(function () {
+        $.get("./api/get/works.php", function (data) {
+            JSON.parse(data).forEach(work => {
+                $("#content").append(`
+                    <div class="text-center">
+                        <h1 class="mb-4 text-center">
+                            ${work.title}
+                        </h1>
+<!--                        <div class="rel-div mb-3" id="mac">-->
+<!--                            <img src="img/mac.png" alt="Logo" style="width: 100%; height: auto">-->
+<!--                            <img src="img/s1.png" alt="" class="inner-image-mac"/>-->
+<!--                        </div>-->
+                        <img src="${work.cover_image_url}" alt="${work.title} cover image" style="width: 100%; height: auto">
+                        <p class="text-start align-self-center">
+                            ${work.description_preview}
+                        </p>
+                        <div style="display: inline;">
+                            <!--            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+                            <!--                <i class="bi bi-plus-circle"></i>-->
+                            <!--            </a>-->
+                            <a class="btn btn-primary mt-2" href="${work.repository_url}">
+                                <i class="bi bi-github"></i>
+                            </a>
+                            <!--            <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">-->
+                            <!--                <i class="bi bi-arrow-down-circle"></i>-->
+                            <!--            </a>-->
+                        </div>
+                    </div>
+                    <hr class="my-5" style="color: white">
+                `);
+            });
+        });
     });
 </script>
