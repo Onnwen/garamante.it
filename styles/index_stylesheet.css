@@ -14,7 +14,7 @@
 
 body {
     background-image:url(../img/background2-medium-webp.webp);
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 a, a:visited, a:link {
