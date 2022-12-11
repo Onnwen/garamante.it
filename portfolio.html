@@ -76,7 +76,7 @@
 <!--                            <img src="img/s1.png" alt="" class="inner-image-mac"/>-->
 <!--                        </div>-->
                         <img src="https://garamante.it${work.cover_image_url}" alt="${work.title} cover image" style="width: 100%; height: auto" class="mb-4 rounded-2">
-                        <p class="text-start align-self-center">
+                        <p class=" " style="text-align: justify; text-justify: inter-word;">
                             ${work.description_preview}
                         </p>
                         <div style="display: inline;">
@@ -90,8 +90,9 @@
                             <!--                <i class="bi bi-arrow-down-circle"></i>-->
                             <!--            </a>-->
                         </div>
-                    </div>
-                   ${(index < works.length - 1 ? '<hr class="my-5 pb-4 pt-4" style="color: white">' : '')}
+                    </div ${(index < works.length - 1 ? 'class="mb-5"' : '')}>
+
+                   ${(index < works.length - 1 ? '<hr class="my-5 pb-3" style="color: white">' : '')}
                 `);
             });
         });
