@@ -13,13 +13,14 @@ body {
     /*overflow: hidden;*/
 }
 
-body.modal-open .supreme-container{
+body.modal-open {
     -webkit-filter: blur(10px);
     -moz-filter: blur(10px);
     -o-filter: blur(10px);
     -ms-filter: blur(10px);
     filter: blur(10px);
 }
+
 
 p {
     color: white;
@@ -55,4 +56,43 @@ button:hover, a:hover {
     filter: alpha(opacity=50);
     opacity: 0.85;
     scale: 1.01;
+}
+
+@media (orientation: landscape) {
+    .header, .background-img {
+        width: 100vw;
+        height: auto;
+    }
+
+    .background-img {
+        content: url("../img/portfolio-background.webp");
+    }
+}
+
+@media (orientation: portrait) {
+    .header, .background-img {
+        width: auto;
+        height: 100vh;
+    }
+
+    .background-img {
+        content: url("../img/portfolio-background-mobile.webp");
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .header {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .background-img {
+        position: absolute;
+        top: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        right: -9999px;
+        margin: auto;
+    }
 }
