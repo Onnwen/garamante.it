@@ -19,8 +19,8 @@ echo quotemeta($path);
 
 try {
     $pdo->beginTransaction();
-    $pdo->exec("INSERT INTO images (alias_text, url) VALUES (" . $title . "," . quotemeta($path) . ")");
-    $pdo->exec("INSERT INTO works (title, description, description_preview, repository_url, type_id, cover_image_id) VALUES (" . $title .", " . $description . ", " .$descriptionPreview . ", " . $repository . ", " .$typeId . ", LAST_INSERT_ID())");
+    $pdo->exec("INSERT INTO images (alias_text, url) VALUES (" . $title . ",'" . quotemeta($path) . "')");
+    $pdo->exec("INSERT INTO works (title, description, description_preview, repository_url, type_id, cover_image_id) VALUES (" . $title .", '" . $description . "', '" .$descriptionPreview . "', '" . $repository . "', " .$typeId . ", LAST_INSERT_ID())");
     $pdo->commit();
 } catch (Exception $e) {
     $pdo->rollBack();
