@@ -355,7 +355,7 @@
                 modalContent.textContent = data.replaceAll(regex, function (date, index) {
                     return "\n\n" + date;
                 });
-                const scrollingElement = (logsModal.querySelector('.modal-body').scrollingElement || logsModal.querySelector('.modal-body').body);
+                const scrollingElement = ($("#logModalText").scrollingElement || $("#logModalText").body);
                 scrollingElement.scrollTop = scrollingElement.scrollHeight;
             });
         }
