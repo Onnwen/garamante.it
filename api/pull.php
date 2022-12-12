@@ -8,4 +8,10 @@ $stmt = $pdo->prepare($sql);
 $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
 
-echo shell_exec('sh ../pull.sh');
+$result = array();
+exec('sh ../pull.sh', $result);
+echo "<pre>";
+foreach ($result as $line) {
+    echo $line . "\n";
+}
+echo "</pre>";
