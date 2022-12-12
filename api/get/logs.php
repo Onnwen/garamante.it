@@ -1,10 +1,10 @@
 <?php
 require_once '../connection.php';
 
-//if (!isset($_SESSION['user_id'])) {
-//    var_dump(http_response_code(401));
-//    exit();
-//}
+if (!isset($_SESSION['user_id'])) {
+    var_dump(http_response_code(401));
+    exit();
+}
 
 $sql = "SELECT CONCAT(users.first_name, ' ', users.last_name) as user, date, content_name, name as event
 FROM chronology

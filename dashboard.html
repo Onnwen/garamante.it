@@ -139,13 +139,13 @@
         <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <ul class="categories list-unstyled mt-5" id="pages-list">
             <li class="">
-                <i class="bi bi-house-fill"></i><a onclick="selectSection('dashboard')" class="sidebar-button section-button sidebar-button-active" id="section-button-dashboard"> Dashboard</a>
+                <i class="bi bi-house-fill"></i><a onclick="selectSection('dashboard')" class="sidebar-button section-button sidebar-button-active d-sm-none d-md-inline" id="section-button-dashboard"> Dashboard</a>
             </li>
             <li class="">
-                <i class="bi bi-clipboard-data-fill"></i><a onclick="selectSection('stats')" class="sidebar-button section-button" id="section-button-stats"> Statistiche</a>
+                <i class="bi bi-clipboard-data-fill"></i><a onclick="selectSection('stats')" class="sidebar-button section-button d-sm-none d-md-inline" id="section-button-stats"> Statistiche</a>
             </li>
             <li class="">
-                <i class="bi bi-briefcase-fill"></i><a onclick="selectSection('portfolio')" class="sidebar-button section-button" id="section-button-portfolio"> Portfolio</a>
+                <i class="bi bi-briefcase-fill"></i><a onclick="selectSection('portfolio')" class="sidebar-button section-button d-sm-none d-md-inline" id="section-button-portfolio"> Portfolio</a>
             </li>
         </ul>
     </aside>
@@ -464,7 +464,7 @@
                 pages.forEach((page, index) => {
                     $("#pages-list").append(
                         '<li class="">\n' +
-                        '<i class="bi ' + (page.icon_name != null ? page.icon_name : "bi-file-earmark-fill") + '"></i><a onclick="selectSection(' + index + ')" class="sidebar-button section-button" id="section-button-' + index + '"> ' + page.name + '</a>\n' +
+                        '<i class="bi ' + (page.icon_name != null ? page.icon_name : "bi-file-earmark-fill") + '"></i><a onclick="selectSection(' + index + ')" class="sidebar-button section-button d-sm-none d-md-inline" id="section-button-' + index + '"> ' + page.name + '</a>\n' +
                         '</li>');
 
                     $("#sections").append(`
@@ -516,9 +516,7 @@
                 user_id: $.session.get("user_id")
             })
                 .done(function (data) {
-                    console.log(data);
                     $("#lastPull").text("Ultimo pull eseguito adesso");
-                    alert(data);
                     window.location.reload();
                 });
         }

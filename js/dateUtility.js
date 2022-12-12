@@ -1,8 +1,6 @@
 function dateIntervalToString(d) {
     let now = new Date();
     let date = new Date(d);
-    console.log(now);
-    console.log(date);
     let elapsed = (now.getTime() - date.getTime()) / 1000;
     let value = elapsed
     let unit = "second";
