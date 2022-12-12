@@ -9,7 +9,12 @@ $stmt->bindParam(':user_id', $user_id);
 $stmt->execute();
 
 $result = array();
-exec('sh ../pull.sh', $result);
+exec('sh pull.sh', $result,  $return);
+if (!$return) {
+    echo "pulled";
+} else {
+    echo "not pulled";
+}
 echo "<pre>";
 foreach ($result as $line) {
     echo $line . "\n";
