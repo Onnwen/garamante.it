@@ -1,3 +1,3 @@
 #!/bin/sh
-cd /var/www/html/Garamante-Website
-#git pull
+#cd /var/www/html/Garamante-Website
+git pull
