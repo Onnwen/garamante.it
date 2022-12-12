@@ -427,7 +427,7 @@
 
     function pull(name) {
         if (!name) {
-            $.get("./api/pull.php", {
+            $.post("./api/pull.php", {
                 user_id: $.session.get("user_id")
             })
                 .done(function (data) {
