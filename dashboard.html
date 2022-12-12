@@ -7,12 +7,14 @@
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/jquery.session/jquery.session.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="./node_modules/prismjs/prism.js"></script>
     <script src="./js/dateUtility.js"></script>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css" media="print" onload="this.media='all'">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="styles/stylesheet.css">
     <link rel="stylesheet" href="styles/dashboard_stylesheet.css">
+    <link rel="stylesheet" href="./node_modules/prismjs/themes/prism-okaidia.min.css"/>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap');
     </style>
@@ -41,6 +43,35 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
                 <button type="button" class="btn btn-primary" id="unlogButton">Disconnetti</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Logs modal -->
+<div class="modal fade" id="logsModal" tabindex="-1" role="dialog" aria-labelledby="logsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="logsModalLabel">Logs</h5>
+                <div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <!--                <div class="d-flex justify-content-center m-5">-->
+                <!--                    <div class="spinner-border text-primary text-dark" role="status">-->
+                <!--                        <span class="sr-only"></span>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <pre>
+                   <code class="log" style="white-space: pre-wrap" id="logModalText">
+                   </code>
+                </pre>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aggiorna</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
             </div>
         </div>
     </div>
@@ -96,7 +127,7 @@
             </div>
             <div class="modal-footer">
                 <button id="portfolioProjectModalCloseButton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                <button id="portfolioProjectModalConfirmButton" type="button" class="btn btn-success" onclick="addWork();">Aggiungi</button>
+                <button id="portfolioProjectModalConfirmButton" type="button" class="btn btn-primary" onclick="addWork();">Aggiungi</button>
             </div>
         </div>
     </div>
@@ -203,8 +234,26 @@
                     </div>
                 </div>
 
-                <p class="section-title mt-4">ULTIME AZIONI</p>
-                <div class="box mb-1">
+                <p class="section-title mt-4">LOGS</p>
+                <div class="row row-cols-2">
+                    <div class="box">
+                        <button data-bs-toggle="modal" data-bs-target="#logsModal" data-bs-whatever="Errors" class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-bug-fill widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Errori</h3>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="box">
+                        <button data-bs-toggle="modal" data-bs-target="#logsModal" data-bs-whatever="Requests" class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-pc-display-horizontal widget-button-icon"></i>
+                            <div class="ms-3">
+                                <h3 class="fs-5 mb-1">Richieste server</h3>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="box">
                     <div class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget">
                         <table class="table" id="logs_table">
                         </table>
@@ -263,6 +312,7 @@
 
 <script>
     let pages = [];
+    const logsModal = document.getElementById('logsModal');
 
     $(document).ready(function () {
         if ($.session.get("user_id") !== undefined) {
@@ -282,6 +332,42 @@
         $.session.clear();
         window.location.href = "admin.html";
     });
+
+    logsModal.addEventListener('show.bs.modal', event => {
+        const button = event.relatedTarget;
+        const type = button.getAttribute('data-bs-whatever');
+
+        const modalTitle = logsModal.querySelector('.modal-title');
+        const modalContent = logsModal.querySelector('#logModalText');
+
+        if (type === "Errors") {
+            modalTitle.textContent = 'Errori';
+            $.get("./api/get/errorLogs.php", function (data) {
+                let r = "2022/12/12 06:49:05 [error] 5680#5680: *4812 open() \"/var/www/html/Irland-Website/avenir.ttc\" failed (2: No such file or directory), client: 172.71.150.156, server: bank.garamante.it, request: \"GET /avenir.ttc HTTP/1.1\", host: \"bank.garamante.it\", referrer: \"https://bank.garamante.it/layout.css\" 2022/12/12 18:47:59 [error] 5680#5680: *4907 FastCGI sent in stderr: \"PHP message: PHP Warning: require_once(../connection.php): Failed to open stream: No such file or directory in /var/www/html/Garamante-Website/api/pull.php on line 2PHP message: PHP Stack trace:PHP message: PHP 1. {main}() /var/www/html/Garamante-Website/api/pull.php:0PHP message: PHP Fatal error: Uncaught Error: Failed opening required '../connection.php' (include_path='.:/usr/share/php') in /var/www/html/Garamante-Website/api/pull.php:2 Stack trace: #0 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 2\" while reading response header from upstream, client: 141.101.96.117, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 18:52:21 [error] 5680#5680: *4945 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: There is no active transaction in /var/www/html/Garamante-Website/api/pull.php:13 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(13): PDO->rollBack() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 13\" while reading response header from upstream, client: 141.101.96.117, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 18:55:55 [error] 5680#5680: *4959 FastCGI sent in stderr: \"PHP message: PHP Warning: Undefined variable $stmp in /var/www/html/Garamante-Website/api/pull.php on line 10PHP message: PHP Stack trace:PHP message: PHP 1. {main}() /var/www/html/Garamante-Website/api/pull.php:0PHP message: PHP Fatal error: Uncaught Error: Call to a member function bindParam() on null in /var/www/html/Garamante-Website/api/pull.php:10 Stack trace: #0 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 10\" while reading response header from upstream, client: 141.101.96.116, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:01:23 [error] 5680#5680: *4997 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `Garamante`.`chronology`.`user_id` at row 1 in /var/www/html/Garamante-Website/api/pull.php:10 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(10): PDOStatement->execute() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 10\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:02:17 [error] 5680#5680: *4998 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `Garamante`.`chronology`.`user_id` at row 1 in /var/www/html/Garamante-Website/api/pull.php:10 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(10): PDOStatement->execute() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 10\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:02:26 [error] 5680#5680: *4997 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `Garamante`.`chronology`.`user_id` at row 1 in /var/www/html/Garamante-Website/api/pull.php:10 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(10): PDOStatement->execute() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 10\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:04:26 [error] 5680#5680: *5010 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 1, 'garamante.it')' at line 1 in /var/www/html/Garamante-Website/api/pull.php:8 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(8): PDO->prepare() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 8\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:04:29 [error] 5680#5680: *5010 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 1, 'garamante.it')' at line 1 in /var/www/html/Garamante-Website/api/pull.php:8 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(8): PDO->prepare() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 8\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:05:09 [error] 5680#5680: *5010 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 1, 'garamante.it')' at line 1 in /var/www/html/Garamante-Website/api/pull.php:8 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(8): PDO->prepare() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 8\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:05:12 [error] 5680#5680: *5013 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 1, 'garamante.it')' at line 1 in /var/www/html/Garamante-Website/api/pull.php:8 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(8): PDO->prepare() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 8\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:06:47 [error] 5680#5680: *5026 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /var/www/html/Garamante-Website/api/pull.php:9 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(9): PDOStatement->bindParam() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 9\" while reading response header from upstream, client: 172.71.94.230, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\""
+                let regex = /[0-9]+\/(0?[1-9]|[1][0-2])\/[0-9]+\s[0-9]+:[0-9]+:[0-9]+/ig;
+                modalContent.textContent = r.replaceAll(regex, function (date, index) {
+                    return "\n\n" + date;
+                });
+            });
+        } else if (type === "Requests") {
+            modalTitle.textContent = 'Richieste server';
+            $.get("./api/get/errorLogs.php", function (data) {
+                let r = "2022/12/12 06:49:05 [error] 5680#5680: *4812 open() \"/var/www/html/Irland-Website/avenir.ttc\" failed (2: No such file or directory), client: 172.71.150.156, server: bank.garamante.it, request: \"GET /avenir.ttc HTTP/1.1\", host: \"bank.garamante.it\", referrer: \"https://bank.garamante.it/layout.css\" 2022/12/12 18:47:59 [error] 5680#5680: *4907 FastCGI sent in stderr: \"PHP message: PHP Warning: require_once(../connection.php): Failed to open stream: No such file or directory in /var/www/html/Garamante-Website/api/pull.php on line 2PHP message: PHP Stack trace:PHP message: PHP 1. {main}() /var/www/html/Garamante-Website/api/pull.php:0PHP message: PHP Fatal error: Uncaught Error: Failed opening required '../connection.php' (include_path='.:/usr/share/php') in /var/www/html/Garamante-Website/api/pull.php:2 Stack trace: #0 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 2\" while reading response header from upstream, client: 141.101.96.117, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 18:52:21 [error] 5680#5680: *4945 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: There is no active transaction in /var/www/html/Garamante-Website/api/pull.php:13 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(13): PDO->rollBack() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 13\" while reading response header from upstream, client: 141.101.96.117, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 18:55:55 [error] 5680#5680: *4959 FastCGI sent in stderr: \"PHP message: PHP Warning: Undefined variable $stmp in /var/www/html/Garamante-Website/api/pull.php on line 10PHP message: PHP Stack trace:PHP message: PHP 1. {main}() /var/www/html/Garamante-Website/api/pull.php:0PHP message: PHP Fatal error: Uncaught Error: Call to a member function bindParam() on null in /var/www/html/Garamante-Website/api/pull.php:10 Stack trace: #0 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 10\" while reading response header from upstream, client: 141.101.96.116, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:01:23 [error] 5680#5680: *4997 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `Garamante`.`chronology`.`user_id` at row 1 in /var/www/html/Garamante-Website/api/pull.php:10 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(10): PDOStatement->execute() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 10\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:02:17 [error] 5680#5680: *4998 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `Garamante`.`chronology`.`user_id` at row 1 in /var/www/html/Garamante-Website/api/pull.php:10 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(10): PDOStatement->execute() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 10\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:02:26 [error] 5680#5680: *4997 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[22007]: Invalid datetime format: 1366 Incorrect integer value: '' for column `Garamante`.`chronology`.`user_id` at row 1 in /var/www/html/Garamante-Website/api/pull.php:10 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(10): PDOStatement->execute() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 10\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:04:26 [error] 5680#5680: *5010 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 1, 'garamante.it')' at line 1 in /var/www/html/Garamante-Website/api/pull.php:8 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(8): PDO->prepare() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 8\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:04:29 [error] 5680#5680: *5010 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 1, 'garamante.it')' at line 1 in /var/www/html/Garamante-Website/api/pull.php:8 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(8): PDO->prepare() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 8\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:05:09 [error] 5680#5680: *5010 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 1, 'garamante.it')' at line 1 in /var/www/html/Garamante-Website/api/pull.php:8 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(8): PDO->prepare() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 8\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:05:12 [error] 5680#5680: *5013 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ' 1, 'garamante.it')' at line 1 in /var/www/html/Garamante-Website/api/pull.php:8 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(8): PDO->prepare() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 8\" while reading response header from upstream, client: 172.71.94.231, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\" 2022/12/12 19:06:47 [error] 5680#5680: *5026 FastCGI sent in stderr: \"PHP message: PHP Fatal error: Uncaught PDOException: SQLSTATE[HY093]: Invalid parameter number in /var/www/html/Garamante-Website/api/pull.php:9 Stack trace: #0 /var/www/html/Garamante-Website/api/pull.php(9): PDOStatement->bindParam() #1 {main} thrown in /var/www/html/Garamante-Website/api/pull.php on line 9\" while reading response header from upstream, client: 172.71.94.230, server: garamante.it, request: \"GET /api/pull.php?user_id=1 HTTP/1.1\", upstream: \"fastcgi://unix:/run/php/php8.1-fpm.sock:\", host: \"www.garamante.it\", referrer: \"https://www.garamante.it/dashboard.html\""
+                let regex = /[0-9]+\/(0?[1-9]|[1][0-2])\/[0-9]+\s[0-9]+:[0-9]+:[0-9]+/ig;
+                modalContent.textContent = r.replaceAll(regex, function (date, index) {
+                    return "\n\n" + date;
+                });
+            });
+        }
+    })
+
+    function escapeRegExp(string) {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    }
+
+    function replaceAll(str, find, replace) {
+        return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+    }
 
     function showDashboard() {
         $("#loading").hide();
@@ -458,7 +544,7 @@
             $("#section-description").text("Gestione della pagina " + pages[name].name);
         }
 
-        if(name === "portfolio"){
+        if (name === "portfolio") {
             loadPortfolio();
         }
     }
@@ -478,14 +564,14 @@
             data: formData,
             contentType: false,
             processData: false,
-            success: function(response){
+            success: function (response) {
                 alert("Progetto aggiunto!");
                 location.reload();
             },
-            fail: function(){
+            fail: function () {
                 alert("Errore: " + data);
             },
-            always: function(){
+            always: function () {
                 $("#portfolioProjectModal").modal('hide');
             }
         });
