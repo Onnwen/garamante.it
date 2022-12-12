@@ -355,7 +355,7 @@
                 modalContent.textContent = data.replaceAll(regex, function (date, index) {
                     return "\n\n" + date;
                 });
-                $("#logModalText").scrollTo(0, $("#logModalText").scrollHeight);
+                $("#logModalText").scrollTop = $("#logModalText").scrollHeight
             });
         }
     })
