@@ -355,6 +355,8 @@
                 modalContent.textContent = data.replaceAll(regex, function (date, index) {
                     return "\n\n" + date;
                 });
+                // Scroll to bottom
+                modalContent.scrollTop = modalContent.scrollHeight;
             });
         }
     })
