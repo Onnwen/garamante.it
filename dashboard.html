@@ -204,7 +204,7 @@
                 </div>
 
                 <p class="section-title mt-4">ULTIME AZIONI</p>
-                <div class="box">
+                <div class="box mb-1">
                     <div class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget">
                         <table class="table" id="logs_table">
                         </table>
@@ -335,6 +335,7 @@
             for (let i = 0; i < logs.length; i++) {
                 if (!lastPull && logs[i].event === "git pull") {
                     $("#lastPull").text("Ultimo pull eseguito " + dateIntervalToString(logs[i].date));
+                    lastPull = true;
                 }
                 table.append(`
                     <tr>
