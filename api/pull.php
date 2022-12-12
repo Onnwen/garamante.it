@@ -10,7 +10,6 @@ try {
     $stmt->execute();
 }
 catch (Exception $e) {
-    $pdo->rollBack();
     echo $e->getMessage();
     exit;
 }
