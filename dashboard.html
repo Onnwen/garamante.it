@@ -329,8 +329,11 @@
     });
 
     $("#unlogButton").on("click", function () {
-        $.session.clear();
-        window.location.href = "admin.html";
+        $.get("./api/logout.php")
+            .done(function () {
+                $.session.clear();
+                window.location.href = "admin.html";
+            });
     });
 
     logsModal.addEventListener('show.bs.modal', event => {
