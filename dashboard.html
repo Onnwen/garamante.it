@@ -165,11 +165,11 @@
                         </button>
                     </div>
                     <div class="box">
-                        <button onclick="selectSection(2)" class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
-                            <i class="bi bi-file-earmark-fill widget-button-icon"></i>
+                        <button onclick="pull();" class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget-button widget-tiny">
+                            <i class="bi bi-arrow-clockwise widget-button-icon"></i>
                             <div class="ms-3">
-                                <h3 class="fs-5 mb-1">Vedi pagine</h3>
-                                <p class="mb-0">Vedi tutte le pagine</p>
+                                <h3 class="fs-5 mb-1">Aggiorna</h3>
+                                <p class="mb-0" id="lastPull"></p>
                             </div>
                         </button>
                     </div>
@@ -200,6 +200,14 @@
                                 <h3 class="fs-5 mb-1">DNS</h3>
                             </div>
                         </a>
+                    </div>
+                </div>
+
+                <p class="section-title mt-4">ULTIMI LOGS</p>
+                <div class="box">
+                    <div class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget">
+                        <table class="table" id="logs_table">
+                        </table>
                     </div>
                 </div>
 
@@ -264,6 +272,7 @@
             selectSection("dashboard");
             loadPages();
             loadAccess();
+            loadLogs();
         } else {
             window.location.href = "admin.html";
         }
@@ -301,6 +310,37 @@
                         <td>${dateIntervalToString(access[i].date)}</td>
                         <td>${access[i].ip}</td>
                         <td>${access[i].country}</td>
+                    </tr>
+                `);
+            }
+        });
+    }
+
+    function loadLogs() {
+        $.get("./api/get/logs.php", function (data) {
+            let logs = JSON.parse(data);
+            let table = $("#logs_table");
+            table.empty();
+            table.append(`
+                <thead>
+                    <tr>
+                        <th scope="col">Utente</th>
+                        <th scope="col">Evento</th>
+                        <th scope="col">Data</th>
+                    </tr>
+                </thead>
+            `);
+
+            let lastPull = false;
+            for (let i = 0; i < logs.length; i++) {
+                if (!lastPull && logs[i].event_id === 1) {
+                    $("#lastPull").text("Ultimo pull eseguito " + dateIntervalToString(logs[i].date));
+                }
+                table.append(`
+                    <tr>
+                        <td>${logs[i].user}</td>
+                        <td>${logs[i].type.toUpperCase()} (${logs[i].content_type})</td>
+                        <td>${dateIntervalToString(logs[i].date)}</td>
                     </tr>
                 `);
             }
@@ -382,6 +422,20 @@
                     selectSection("dashboard");
                 })
             });
+    }
+
+    function pull(name) {
+        if (!name) {
+            $.get("./api/pull.php", {
+                user_id: $.session.get("user_id")
+            })
+                .done(function (data) {
+                    let result = JSON.parse(data);
+                    if (result.status === "success") {
+                        $("#lastPull").text("Ultimo pull eseguito adesso");
+                    }
+                });
+        }
     }
 
     function selectSection(name) {

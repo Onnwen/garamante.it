@@ -1,7 +1,6 @@
 <?php
 require_once('../connection.php');
 
-
 $title = $_POST['title'] ?? '';
 $description = $_POST['description'] ?? '';
 $descriptionPreview = $_POST['descriptionPreview'] ?? '';
