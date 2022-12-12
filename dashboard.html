@@ -431,6 +431,7 @@
                 user_id: $.session.get("user_id")
             })
                 .done(function (data) {
+                    console.log(data);
                     $("#lastPull").text("Ultimo pull eseguito adesso");
                     alert(data);
                     window.location.reload();
