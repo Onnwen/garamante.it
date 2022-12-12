@@ -1,6 +1,6 @@
 <?php
 require_once('connection.php');
-shell_exec('git pull');
+//shell_exec('git pull');
 
 $user_id = $_POST['user_id'] ?? '';
 
