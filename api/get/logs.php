@@ -6,7 +6,10 @@ require_once '../connection.php';
 //    exit();
 //}
 
-$sql = "SELECT * FROM pages";
+$sql = "SELECT CONCAT(users.first_name, ' ', users.last_name) as user, date, content_name, name as event
+FROM chronology
+         INNER JOIN chronology_events ON chronology.event_id = chronology_events.id
+         INNER JOIN users ON chronology.user_id = users.id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 
