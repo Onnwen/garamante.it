@@ -5,9 +5,9 @@ shell_exec('git pull');
 $user_id = $_POST['user_id'] ?? '';
 
 try {
-    $pdo->beginTransaction();
-    $pdo->exec("INSERT INTO Garamante.chronology (user_id, event_id, date, content_name) VALUES (" . $user_id . ", 1, DEFAULT, 'garamante.it')");
-    $pdo->commit();
+    $sql = "INSERT INTO Garamante.chronology (user_id, event_id, date, content_name) VALUES (" . $user_id . ", 1, DEFAULT, 'garamante.it')";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
 }
 catch (Exception $e) {
     $pdo->rollBack();
