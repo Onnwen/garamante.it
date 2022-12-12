@@ -64,7 +64,7 @@
                 <!--                        <span class="sr-only"></span>-->
                 <!--                    </div>-->
                 <!--                </div>-->
-                <pre>
+                <pre id="logModalPre">
                    <code class="log" style="white-space: pre-wrap" id="logModalText">
                    </code>
                 </pre>
@@ -355,7 +355,7 @@
                 modalContent.textContent = data.replaceAll(regex, function (date, index) {
                     return "\n\n" + date;
                 });
-                const scrollingElement = ($("#logModalText").scrollingElement || $("#logModalText").body);
+                const scrollingElement = ($("#logModalPre").scrollingElement || $("#logModalPre").body);
                 scrollingElement.scrollTop = scrollingElement.scrollHeight;
             });
         }
