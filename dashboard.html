@@ -431,10 +431,7 @@
                 user_id: $.session.get("user_id")
             })
                 .done(function (data) {
-                    let result = JSON.parse(data);
-                    if (result.status === "success") {
-                        $("#lastPull").text("Ultimo pull eseguito adesso");
-                    }
+                    $("#lastPull").text("Ultimo pull eseguito adesso");
                     alert("Pull eseguito correttamente!");
                     window.location.reload();
                 });
