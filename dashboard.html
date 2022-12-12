@@ -356,7 +356,7 @@
                     return "\n\n" + date;
                 });
                 // Scroll to bottom
-                logsModal.querySelector('.modal-body').scrollTop = logsModal.querySelector('.modal-body').scrollHeight;
+                logsModal.querySelector('.modal-body').scrollTo(0, logsModal.querySelector('.modal-body').scrollHeight);
             });
         }
     })
