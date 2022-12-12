@@ -13,7 +13,7 @@ exec('sh pull.sh', $result,  $return);
 if (!$return) {
     echo "pulled";
 } else {
-    echo "not pulled";
+    echo "error:" . $return;
 }
 echo "<pre>";
 foreach ($result as $line) {
