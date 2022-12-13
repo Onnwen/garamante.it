@@ -5,7 +5,6 @@ function parseLogs(logs, regex) {
             isFirst = false;
             return date;
         } else {
-            isFirst = true;
             return "<hr>" + date;
         }
     });
