@@ -70,7 +70,7 @@
                 </pre>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Aggiorna</button>
+                <button type="button" class="btn btn-secondary" onclick="updateLogs()">Aggiorna</button>
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Chiudi</button>
             </div>
         </div>
@@ -347,32 +347,56 @@
             });
     });
 
+    let logsType = "Errors";
     logsModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;
         const type = button.getAttribute('data-bs-whatever');
 
         const modalTitle = logsModal.querySelector('.modal-title');
         const modalContent = logsModal.querySelector('#logModalText');
+        logsType = type;
 
         if (type === "Errors") {
             modalTitle.textContent = 'Errori';
             $.get("./api/get/errorLogs.php", function (data) {
                 let regex = /[0-9]+\/(0?[1-9]|[1][0-2])\/[0-9]+\s[0-9]+:[0-9]+:[0-9]+/ig;
-                modalContent.textContent = data.replaceAll(regex, function (date, index) {
-                    return "\n\n" + date;
-                });
+                modalContent.html(data.replaceAll(regex, function (date) {
+                    return "<hr>" + date;
+                }))
+                console.log("modal-content: " + logsModal.querySelector('.modal-content').scrollHeight);
+                console.log("logModalPre: " + $("#logModalPre").height());
+                console.log("logModalText: " + $("#logModalText").height());
             });
         } else if (type === "Requests") {
             modalTitle.textContent = 'Richieste server';
             $.get("./api/get/accessLogs.php", function (data) {
-                let regex = /\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b\s-\s-\s\[(0?[1-9]|[1][0-2])\/[a-zA-Z][a-zA-Z][a-zA-Z]\/\d\d\d\d:[0-9]+:\d\d:[0-9]+\s\+\d\d\d\d] /ig;
-                modalContent.textContent = data.replaceAll(regex, function (date, index) {
-                    return "\n\n" + date;
-                });
-                $("#logModalText").scrollTop = $("#logModalText").scrollHeight
+                let regex = /\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b\s-\s-\s\[[^\]]*\]/ig;
+                modalContent.html(data.replaceAll(regex, function (date, index) {
+                    return "<hr>" + date;
+                }))
+                $("#logModalPre").scrollTop = $("#logModalPre").scrollHeight
             });
         }
     })
+
+    function updateLogs() {
+        $("#logModalText").html('<div class="d-flex justify-content-center m-5">\n' +
+            '                            <div class="spinner-border text-primary text-dark" role="status">\n' +
+            '                                <span class="sr-only"></span>\n' +
+            '                            </div>\n' +
+            '                        </div>');
+        if (logsType === "Errors") {
+            $.get("./api/get/errorLogs.php", function (data) {
+                let regex = /[0-9]+\/(0?[1-9]|[1][0-2])\/[0-9]+\s[0-9]+:[0-9]+:[0-9]+/ig;
+                $("#logModalText").html(data.replaceAll(regex, function (date, index) {
+                    return "<hr>" + date;
+                }))
+            });
+        } else if (logsType === "Requests") {
+            $.get("./api/get/accessLogs.php", function (data) {
+            });
+        }
+    }
 
     function escapeRegExp(string) {
         return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
