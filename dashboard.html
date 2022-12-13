@@ -318,7 +318,7 @@
         if ($.session.get("user_id") !== undefined) {
             $.get("./api/isAuth.php")
                 .done(function (data) {
-                    if (data === "true") {
+                    if (data === 1) {
                         showDashboard();
                         $("#username").text($.session.get("firstName") + " " + $.session.get("lastName"));
 
