@@ -432,7 +432,7 @@
 
             let lastPull = false;
             for (let i = 0; i < logs.length; i++) {
-                if (!lastPull && logs[i].event === "git pull") {
+                if (!lastPull && logs[i].event === "Git pull") {
                     $("#lastPull").text("Ultimo pull eseguito " + dateIntervalToString(logs[i].date));
                     lastPull = true;
                 }
