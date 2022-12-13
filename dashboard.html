@@ -9,6 +9,7 @@
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="./node_modules/prismjs/prism.js"></script>
     <script src="./js/dateUtility.js"></script>
+    <script src="./js/stringUtility.js"></script>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css" media="print" onload="this.media='all'">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -360,8 +361,15 @@
             modalTitle.textContent = 'Errori';
             $.get("./api/get/errorLogs.php", function (data) {
                 let regex = /[0-9]+\/(0?[1-9]|[1][0-2])\/[0-9]+\s[0-9]+:[0-9]+:[0-9]+/ig;
+                let isFirst = true;
                 modalContent.html(data.replaceAll(regex, function (date) {
-                    return "<hr>" + date;
+                    if (isFirst) {
+                        isFirst = false;
+                        return date;
+                    } else {
+                        isFirst = true;
+                        return "<hr>" + date;
+                    }
                 }))
                 console.log("modal-content: " + logsModal.querySelector('.modal-content').scrollHeight);
                 console.log("logModalPre: " + $("#logModalPre").height());
@@ -396,14 +404,6 @@
             $.get("./api/get/accessLogs.php", function (data) {
             });
         }
-    }
-
-    function escapeRegExp(string) {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-    }
-
-    function replaceAll(str, find, replace) {
-        return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
     }
 
     function showDashboard() {
@@ -553,7 +553,7 @@
             $.post("./api/pull.php", {
                 user_id: $.session.get("user_id")
             })
-                .done(function (data) {
+                .done(function () {
                     $("#lastPull").text("Ultimo pull eseguito adesso");
                     window.location.reload();
                 });
