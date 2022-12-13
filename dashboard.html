@@ -62,7 +62,7 @@
             <div class="modal-body">
                 <pre id="logModalPre">
                    <code class="log" style="white-space: pre-wrap" id="logModalText">
-                       <div class="d-flex justify-content-center m-auto">
+                       <div class="d-flex justify-content-center m-5">
                             <div class="spinner-border text-primary text-dark" role="status">
                                 <span class="sr-only"></span>
                             </div>
@@ -351,16 +351,14 @@
     let logsType = "Errors";
     logsModal.addEventListener('show.bs.modal', event => {
         const button = event.relatedTarget;
-        const type = button.getAttribute('data-bs-whatever');
+        logsType = button.getAttribute('data-bs-whatever');
 
         const modalTitle = logsModal.querySelector('.modal-title');
-        const modalContent = $("#logModalText");
-        logsType = type;
 
-        if (type === "Errors") {
+        if (logsType === "Errors") {
             modalTitle.textContent = 'Errori';
             loadErrorsLogs();
-        } else if (type === "Requests") {
+        } else if (logsType === "Requests") {
             modalTitle.textContent = 'Richieste server';
             loadAccessLogs();
         }
