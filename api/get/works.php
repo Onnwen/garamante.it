@@ -1,12 +1,6 @@
 <?php
+require_once '../auth.php';
 require_once '../connection.php';
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    var_dump(http_response_code(401));
-    exit();
-}
-
 
 $sql = "SELECT works.id, title, description_preview, description, images.url as cover_image_url, works_type.name as type, repository_url
 FROM works

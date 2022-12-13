@@ -1,11 +1,6 @@
 <?php
+require_once '../auth.php';
 require_once '../connection.php';
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    var_dump(http_response_code(401));
-    exit();
-}
 
 $sql = "SELECT CONCAT(users.first_name, ' ', users.last_name) as user, date, content_name, name as event
 FROM chronology
