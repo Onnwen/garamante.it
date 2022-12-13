@@ -1,2 +1,4 @@
 <?php
-unset($_SESSION["user_id"]);
+session_start();
+$_SESSION = array();
+session_destroy();
