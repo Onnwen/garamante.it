@@ -316,13 +316,24 @@
 
     $(document).ready(function () {
         if ($.session.get("user_id") !== undefined) {
-            showDashboard();
-            $("#username").text($.session.get("firstName") + " " + $.session.get("lastName"));
+            $.get("./api/isAuth.php")
+                .done(function (data) {
+                    if (data === true) {
+                        showDashboard();
+                        $("#username").text($.session.get("firstName") + " " + $.session.get("lastName"));
 
-            selectSection("dashboard");
-            loadPages();
-            loadAccess();
-            loadLogs();
+                        selectSection("dashboard");
+                        loadPages();
+                        loadAccess();
+                        loadLogs();
+                    }
+                    else {
+                        window.location.href = "admin.php";
+                    }
+                })
+                .fail(function () {
+                    window.location.href = "admin.php";
+                });
         } else {
             window.location.href = "admin.html";
         }
