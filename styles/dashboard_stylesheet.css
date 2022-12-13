@@ -211,10 +211,11 @@ body {
     .sidebar .search {
         padding: 10px 0 10px 30px
     }
+
+    .sidebar {
+        width: 0px;
+    }
 }
-
-
-
 
 /** --------------------------------
  -- welcome
@@ -349,7 +350,7 @@ th {
 -------------------------------- */
 
 .navbar {
-    background-color: var(--navbar-bg-color) !important;
+    background-color: var(--navbar-bg-color);
     border: none !important;
 }
 .navbar .dropdown-menu {

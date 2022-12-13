@@ -139,23 +139,23 @@
         <i class="uil-bars close-aside d-md-none d-lg-none" data-close="show-side-navigation1"></i>
         <ul class="categories list-unstyled mt-5" id="pages-list">
             <li class="">
-                <i class="bi bi-house-fill"></i><a onclick="selectSection('dashboard')" class="sidebar-button section-button sidebar-button-active d-sm-none d-md-inline" id="section-button-dashboard"> Dashboard</a>
+                <i class="bi bi-house-fill"></i><a onclick="selectSection('dashboard')" class="sidebar-button section-button sidebar-button-active" id="section-button-dashboard"> Dashboard</a>
             </li>
             <li class="">
-                <i class="bi bi-clipboard-data-fill"></i><a onclick="selectSection('stats')" class="sidebar-button section-button d-sm-none d-md-inline" id="section-button-stats"> Statistiche</a>
+                <i class="bi bi-clipboard-data-fill"></i><a onclick="selectSection('stats')" class="sidebar-button section-button" id="section-button-stats"> Statistiche</a>
             </li>
             <li class="">
-                <i class="bi bi-briefcase-fill"></i><a onclick="selectSection('portfolio')" class="sidebar-button section-button d-sm-none d-md-inline" id="section-button-portfolio"> Portfolio</a>
+                <i class="bi bi-briefcase-fill"></i><a onclick="selectSection('portfolio')" class="sidebar-button section-button" id="section-button-portfolio"> Portfolio</a>
             </li>
         </ul>
     </aside>
 
     <section id="wrapper">
-        <nav class="navbar navbar-expand-md">
+        <nav class="navbar navbar-expand-md fixed-top ms-2 blur-background" style="background-color: rgba(0,0,0,0.5); !important;">
             <div class="container-fluid mx-2">
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#toggle-navbar" aria-controls="toggle-navbar" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="uil-bars text-white"></i>
+                        <i class="uil-bars text-white" style="color: white"></i>
                     </button>
                     <div class="navbar-brand" href="#">garamante<span class="main-color" style="font-size: 16px; font-weight: 400">CMS</span>
                     </div>
@@ -163,7 +163,7 @@
                 <div class="collapse navbar-collapse" id="toggle-navbar">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <p id="username"></p>
+                            <p id="username" class="mb-0"></p>
                         </li>
                         <li class="nav-item ms-4">
                             <button class="transparent-button gray-color" type="button" data-bs-toggle="modal" data-bs-target="#unlogModal">
@@ -175,7 +175,7 @@
             </div>
         </nav>
 
-        <div class="p-4 container-fluid" id="sections">
+        <div class="p-4 container-fluid" style="margin-top: 100px;" id="sections">
             <div class="welcome mb-5">
                 <div class="content rounded-3 p-3">
                     <h1 class="fs-3" id="section-title">garamante.it</h1>
@@ -260,7 +260,7 @@
                     </div>
                 </div>
 
-                <p class="section-title mt-5">UTLIMI ACCESSI</p>
+                <p class="section-title mt-5">AUTENTICAZIONI</p>
                 <div class="box">
                     <div class="admin d-flex align-items-center rounded-2 p-3 mb-4 widget">
                         <table class="table" id="access_table">
@@ -424,8 +424,8 @@
                 <thead>
                     <tr>
                         <th scope="col">Utente</th>
-                        <th scope="col">Evento</th>
                         <th scope="col">Data</th>
+                        <th scope="col">Evento</th>
                     </tr>
                 </thead>
             `);
@@ -439,8 +439,8 @@
                 table.append(`
                     <tr>
                         <td>${logs[i].user}</td>
-                        <td>${logs[i].event.toUpperCase()} (${logs[i].content_name})</td>
                         <td>${dateIntervalToString(logs[i].date)}</td>
+                        <td>${logs[i].event} (${logs[i].content_name})</td>
                     </tr>
                 `);
             }

@@ -31,6 +31,13 @@ a, a:visited, a:link {
     color: inherit;
 }
 
+.blur-background {
+    -webkit-backdrop-filter: blur(30px);
+    -moz-backdrop-filter: blur(30px);
+    -o-backdrop-filter: blur(30px);
+    -ms-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+}
 
 .blink {
     animation: blink 1s step-start 0s infinite;
