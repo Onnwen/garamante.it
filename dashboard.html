@@ -359,31 +359,10 @@
 
         if (type === "Errors") {
             modalTitle.textContent = 'Errori';
-            $.get("./api/get/errorLogs.php", function (data) {
-                let regex = /[0-9]+\/(0?[1-9]|[1][0-2])\/[0-9]+\s[0-9]+:[0-9]+:[0-9]+/ig;
-                let isFirst = true;
-                modalContent.html(data.replaceAll(regex, function (date) {
-                    if (isFirst) {
-                        isFirst = false;
-                        return date;
-                    } else {
-                        isFirst = true;
-                        return "<hr>" + date;
-                    }
-                }))
-                console.log("modal-content: " + logsModal.querySelector('.modal-content').scrollHeight);
-                console.log("logModalPre: " + $("#logModalPre").height());
-                console.log("logModalText: " + $("#logModalText").height());
-            });
+            loadErrorsLogs();
         } else if (type === "Requests") {
             modalTitle.textContent = 'Richieste server';
-            $.get("./api/get/accessLogs.php", function (data) {
-                let regex = /\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b\s-\s-\s\[[^\]]*\]/ig;
-                modalContent.html(data.replaceAll(regex, function (date, index) {
-                    return "<hr>" + date;
-                }))
-                $("#logModalPre").scrollTop = $("#logModalPre").scrollHeight
-            });
+            loadAccessLogs();
         }
     })
 
@@ -394,16 +373,22 @@
             '                            </div>\n' +
             '                        </div>');
         if (logsType === "Errors") {
-            $.get("./api/get/errorLogs.php", function (data) {
-                let regex = /[0-9]+\/(0?[1-9]|[1][0-2])\/[0-9]+\s[0-9]+:[0-9]+:[0-9]+/ig;
-                $("#logModalText").html(data.replaceAll(regex, function (date, index) {
-                    return "<hr>" + date;
-                }))
-            });
+            loadErrorsLogs()
         } else if (logsType === "Requests") {
-            $.get("./api/get/accessLogs.php", function (data) {
-            });
+            loadAccessLogs();
         }
+    }
+
+    function loadErrorsLogs() {
+        $.get("./api/get/errorLogs.php", function (logs) {
+            $("#logModalText").html(parseLogs(logs, /[0-9]+\/(0?[1-9]|[1][0-2])\/[0-9]+\s[0-9]+:[0-9]+:[0-9]+/ig));
+        });
+    }
+
+    function loadAccessLogs() {
+        $.get("./api/get/accessLogs.php", function (logs) {
+            $("#logModalText").html(parseLogs(logs, /\b(?:(?:2(?:[0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9])\.){3}(?:(?:2([0-4][0-9]|5[0-5])|[0-1]?[0-9]?[0-9]))\b\s-\s-\s\[[^\]]*\]/ig));
+        });
     }
 
     function showDashboard() {
