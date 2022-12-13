@@ -1,6 +1,11 @@
 <?php
 require_once '../auth.php';
 
-$myfile = fopen("/var/log/nginx/access.log", "r") or die("Unable to open file!");
-echo fread($myfile,filesize("/var/log/nginx/access.log"));
-fclose($myfile);
+try {
+    $accessLog = fopen("/var/log/nginx/access.log", "r") or throw new Exception("Unable to open file!");
+    echo fread($accessLog, filesize("/var/log/nginx/access.log"));
+    fclose($accessLog);
+}
+catch (Exception $e) {
+    echo "Nessun dato disponibile.";
+}
