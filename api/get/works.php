@@ -1,5 +1,4 @@
 <?php
-require_once '../auth.php';
 require_once '../connection.php';
 
 $sql = "SELECT works.id, title, description_preview, description, images.url as cover_image_url, works_type.name as type, repository_url
