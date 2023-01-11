@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Garamante | 404</title>
-    <link rel="stylesheet" href="/var/www/html/Garamante-Website/node_modules/bootstrap/dist/css/bootstrap.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500&display=swap');
         h1 {
             font-family: "Prompt", sans-serif;
             font-weight: 400;
             font-size: 26px;
+            margin-bottom: 0;
         }
 
         *, *:before, *:after {
@@ -23,7 +23,6 @@
             font-size: 18px;
             margin: 0 0 0;
             line-height: 1.5;
-            white-space: pre;
         }
 
         .opacity-appear {
@@ -62,7 +61,6 @@
             background-attachment: fixed;
             background-size: cover;
             background-position: center center;
-            height: 100vh;
             background-color: #000000;
         }
 
@@ -70,7 +68,7 @@
             font-family: "Cutive Mono", monospace;
             margin: 0 0 0.5em;
             line-height: 1.5;
-            opacity: 0.85;
+            opacity: 0.75;
             transition: opacity .2s ease-in-out, text-shadow .2s ease-in-out;
             font-weight: 100;
             color: inherit;
@@ -89,17 +87,37 @@
             animation: none;
             color: white;
         }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body style="background-image: none">
-<div class="h-100 d-flex align-items-center justify-content-center">
-    <div style="color: white;" class="text-center">
+<div class="center">
+    <div style="color: white;">
         <h1 class="scale-big-appear">404</h1>
-        <p class="opacity-appear">sun has set, the page is out of domain</p>
+        <p class="opacity-appear">Non è solo un codice di errore, è anche il risultato dell'ultimo teorema matematico che Garamante ha dimostrato.</p>
     </div>
-    <footer class="fixed-bottom text-center mb-4">
-        <a href="https://garamante.it">>_ cd garamante.it</a>
-    </footer>
 </div>
+<footer class="footer">
+    <a href="https://garamante.it">>_ cd garamante.it</a>
+</footer>
 </body>
 </html>
