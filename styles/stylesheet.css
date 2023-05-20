@@ -3,7 +3,7 @@
     src: url('/fonts/Almarena-Regular.ttf');
 }
 
-p, a {
+p, a, button {
     font-family: Almarena-Light, sans-serif;
     font-weight: 100;
     font-size: 18px;
@@ -173,6 +173,7 @@ body {
     font: inherit;
     cursor: pointer;
     outline: inherit;
+    font-family: Almarena-Light, sans-serif;
 }
 
 @keyframes opacity {
