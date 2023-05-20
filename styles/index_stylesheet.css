@@ -35,7 +35,7 @@ body {
     /*overflow: hidden;*/
 }
 
-a, a:visited, a:link {
+a, a:visited, a:link, a:focus, a:active {
     transition: opacity .2s ease-in-out, text-shadow .2s ease-in-out;
     text-decoration: none;
     opacity: 0.85;
@@ -50,8 +50,7 @@ a:hover {
 }
 
 a:active {
-    opacity: 0.8;
-    font-weight: bold;
+    opacity: 0.5;
 }
 
 .mast {
