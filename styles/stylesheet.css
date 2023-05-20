@@ -1,12 +1,18 @@
-h1 {
-    font-family: "Prompt", sans-serif;
-    font-weight: 400;
-    font-size: 26px;
+@font-face {
+    font-family: 'Almarena-Light';
+    src: url('/fonts/Almarena-Regular.ttf');
 }
-* {
-    font-family: "Prompt", sans-serif;
+
+p, a {
+    font-family: Almarena-Light, sans-serif;
     font-weight: 100;
     font-size: 18px;
+}
+
+h1 {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 400;
+    font-size: 26px;
 }
 
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
@@ -26,6 +32,9 @@ a, a:visited, a:link {
     font-family: "Cutive Mono", monospace;
     font-size: 18px;
     margin: 0 0 0 0;
+}
+
+a {
     line-height: 1.5;
     font-weight: 100;
     color: inherit;

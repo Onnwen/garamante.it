@@ -1,15 +1,33 @@
-.mast__title, h1 {
-    font-family: "Prompt", sans-serif;
-    font-weight: 400;
-    font-size: 26px;
+@font-face {
+    font-family: 'Almarena-Light';
+    src: url('/fonts/Almarena-Light.ttf');
 }
-.mast__text, p {
-    font-family: "Prompt", sans-serif;
+
+html {
+    background: black;
+}
+
+.mast__text {
+    font-family: "Prompt", sans-serif !important;
     font-weight: 100;
     font-size: 18px;
     margin: 0 0 0;
     line-height: 1.5;
     white-space: pre;
+}
+
+.mast__text {
+    font-size: 17px;
+}
+
+p {
+    font-family: "Prompt", sans-serif !important;
+}
+
+.mast__title, h1 {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 300;
+    font-size: 20px;
 }
 
 body {

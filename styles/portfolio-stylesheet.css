@@ -1,8 +1,11 @@
 h1 {
-    font-family: Prompt, sans-serif;
     font-weight: 400;
     color: #ffffff;
     text-align: center;
+}
+
+* {
+    font-family: "Prompt", sans-serif !important;
 }
 
 a:link, a:hover, a:visited, a:active {
