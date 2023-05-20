@@ -39,6 +39,7 @@ a, a:visited, a:link {
     transition: opacity .2s ease-in-out, text-shadow .2s ease-in-out;
     text-decoration: none;
     opacity: 0.85;
+    color: white;
 }
 
 a:hover {
