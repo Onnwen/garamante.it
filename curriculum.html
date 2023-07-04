@@ -12,10 +12,10 @@
 
 <body>
 <div class="cv-container p-4">
+    <canvas id="canvas"></canvas>
     <h1 class="pt-5">Curriculum Vitae</h1>
-    <div class="row">
-        <div class="col-12 col-mb-7">
-            <h2 class="mb-4">Anagrafica</h2>
+    <div class="row mt-5">
+        <div class="col-12">
             <div class="row contact-card p-3 py-4">
                 <div class="col-3">
                     <img src="./img/cv.jpg" alt="Foto profilo" class="img-fluid rounded-circle my-1">
@@ -31,74 +31,88 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-mb-5">
+        <div class="col-12">
             <h2 class="mb-3">Contatti</h2>
             <p class="caption-text my-0 pt-1">EMAIL</p>
-            <p class="info-text my-0">onnwen@garamante.it</p>
+            <a href="mailto:onnwen@garamante.it" class="info-text my-0"><p class="info-text my-0">onnwen@garamante.it</p></a>
             <hr class="no-margin">
             <p class="caption-text my-0">CELLULARE</p>
-            <p class="info-text my-0">+39 328 6378299</p>
+            <a href="tel:+393286378299" class="info-text my-0"><p class="info-text my-0">+39 328 6378299</p></a>
             <hr class="no-margin">
             <p class="caption-text my-0">INDIRIZZO</p>
             <p class="info-text my-0">Via Roma 14, Fornovo di Taro (PR)</p>
         </div>
     </div>
 
-    <h2 class="mb-4 pt-3">Esperienze</h2>
+    <h2 class="mb-4 pt-3">A proposito di me</h2>
+    <p class="description-text">Iscritto all'Università Statale di Milano (facoltà di "Sicurezza Informatica"), ho da poco conseguito il diploma in Informatica e Telecomunicazioni.<br>L'indirizzo del mio percorso di studi, le esperienze e le competenze acquisite negli anni scolastici, non sono però riassuntive di tutte le mie passioni e dei miei interessi. Mi piace programmare, sviluppare, certo, ma allo stesso tempo apprezzo il profumo della carta, in particolare quella dei libri. <br> Sono aperto ai cambiamenti, alle trasformazioni del tempo presente: la mia stessa giovane vita (sono cresciuto in Francia, trasferendomi in Italia alla fine delle elementari) è emblematica di quanto elasticità, apertura mentale, capacità di adattamento, rappresentino qualità fondamentali in un mondo in continua evoluzione. <br>Gli stage svolti durante il percorso scolastico mi hanno insegnato l'importanza del gioco di squadra. Non solo: è in team che ho imparato a riconoscere il momento giusto per esercitare la mia leadership, cercando di trovare soluzioni praticabili nei momenti di crisi e creando consenso attorno ad esse.</p>
+
+    <h2 class="mb-4 pt-3">Esperienze lavorative</h2>
+    <div class="row">
+        <div class="col-12 col-mb-6">
+            <p class="caption-text my-0">MARZO 2023</p>
+            <p class="title-text my-0">Sviluppatore iOS & sysadmin</p>
+            <p class="subtitle-text">Il Blog di Dario D'Angelo</p>
+        </div>
+        <div class="col-12 col-mb-6">
+            <p class="description-text">Sono entrato nel team di Dario D'Angelo, esperto italiano di geopolitica, promuovendo la crescita del suo progetto in vari settori. Anzitutto sviluppando l'app iOS del suo Blog che ha registrato migliaia di downloads.<br>Nel mio ruolo di sysadmin ho affrontato numerose sfide, tra cui una migrazione su istanza VPS e la difesa del portale da un attacco cyber informatico. Nel quotidiano mi occupo di approntare miglioramenti riguardanti la gestione social e la strategia di lungo termine riguardante il coinvolgimento della community di lettori.</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 col-mb-6">
+            <p class="caption-text my-0">APRILE 2021 &#8594; MARZO 2023</p>
+            <p class="title-text my-0">Sviluppatore iOS</p>
+            <p class="subtitle-text">Fiverr</p>
+        </div>
+        <div class="col-12 col-mb-6">
+            <p class="description-text">La piattaforma di freelancing Fiverr mi ha consentito di mettere in pratica nell'ambito che più conta, quello professionale, le competenze di programmazione acquisite negli anni in fatto di sviluppo iOS.<br>Un'esperienza che mi ha consentito di misurarmi con una realtà stimolante e caratterizzata dalla presenza di sfide di vario genere. Tra queste la relazione con i clienti, spesso e volentieri in lingua inglese.</p>
+        </div>
+    </div>
+    <hr>
     <div class="row">
         <div class="col-12 col-mb-6">
             <p class="caption-text my-0">SETTEMBRE 2022</p>
-            <p class="title-text my-0">Stage da sviluppatore</p>
-            <p class="subtitle-text">Engage IT Services</p>
+            <p class="title-text my-0">Sviluppatore web</p>
+            <p class="subtitle-text">Engage IT Services SRL</p>
         </div>
         <div class="col-12 col-mb-6">
-            <p class="description-text">Esperienza di PCTO in azienda presso Engage IT Services a Fidenza (PR). Stage in cui ho ampliato le mie conoscenze del framework AngularJS e approfondito la gestione di database SQLite ed Entity Framework.</p>
+            <p class="description-text">In questo stage ho vissuto un'esperienza di PCTO in azienda presso "Engage IT Services", a Fidenza (PR). Qui ho ampliato le mie conoscenze del framework AngularJS e approfondito la gestione di database SQLite ed Entity Framework.</p>
         </div>
     </div>
     <hr>
     <div class="row">
         <div class="col-12 col-mb-6">
             <p class="caption-text my-0">GIUGNO 2022</p>
-            <p class="title-text my-0">Stage da sviluppatore</p>
-            <p class="subtitle-text">ISolutions</p>
+            <p class="title-text my-0">Sviluppatore web</p>
+            <p class="subtitle-text">iSolutions</p>
         </div>
         <div class="col-12 col-mb-6">
-            <p class="description-text">Stage in iSolutions a Noceto (PR), in occasione di un percorso di PCTO in cui ho maturato la mia esperienza riguardo al framework ASP.Net e SQL.</p>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-12 col-mb-6">
-            <p class="caption-text my-0">DA APRILE 2021</p>
-            <p class="title-text my-0">Sviluppatore iOS freelance</p>
-            <p class="subtitle-text">Fiverr</p>
-        </div>
-        <div class="col-12 col-mb-6">
-            <p class="description-text">Tramite la piattaforma di freelancing Fiverr metto in pratica in ambito professionale le mie competenze di programmazione nel campo dello sviluppo iOS.</p>
+            <p class="description-text">In occasione di un percorso di PCTO presso "iSolutions", a Noceto (PR), ho maturato esperienza rispetto al framework ASP.Net e SQL.</p>
         </div>
     </div>
     <hr>
     <div class="row">
         <div class="col-12 col-mb-6">
-            <p class="caption-text my-0">SETTEMBRE 2021, FEBBRARIO & NOVEMBRE 2022</p>
-            <p class="title-text my-0">Stage da sviluppatore</p>
+            <p class="caption-text my-0">2021, 2022</p>
+            <p class="title-text my-0">Sviluppatore web</p>
             <p class="subtitle-text">Università degli Studi di Parma</p>
         </div>
         <div class="col-12 col-mb-6">
-            <p class="description-text">Ripetute esperienze di PCTO all'Università degli Studi di Parma, focalizzate sull'aggiornamento di siti inerenti a progetti di fisica.</p>
+            <p class="description-text">Nel settembre 2021 e nei mesi di febbraio e novembre 2022, ho inanellato diverse esperienze di PCTO all'Università degli Studi di Parma. Queste si sono focalizzate sull'aggiornamento di siti inerenti progetti di fisica.</p>
         </div>
     </div>
 
-    <h2 class="mb-4 pt-4">Educazione</h2>
-    <p class="caption-text my-0">DAL 2018</p>
-    <p class="title-text my-0">Diploma in "Informatica e Telecomunicazioni"</p>
-    <p class="subtitle-text">Istituto di Istruzione Superiore Statale "Carlo Emilio Gadda"</p>
+    <h2 class="mb-4 pt-4">Formazione</h2>
+    <p class="caption-text my-0">2018 &#8594; 2023</p>
+    <p class="title-text my-0">Diploma in informatica e telecomunicazioni <span class="mark-text">94/100</span></p>
+    <p class="subtitle-text">Istituto d'Istruzione Superiore Statale "Carlo Emilio Gadda"</p>
     <hr>
-    <p class="caption-text my-0">2014 - 2018</p>
-    <p class="title-text my-0">Licenza media</p>
+    <p class="caption-text my-0">2014 &#8594; 2018</p>
+    <p class="title-text my-0">Licenza media <span class="mark-text">7/10</span></p>
     <p class="subtitle-text">Istituto Comprensivo "Luigi Malerba"</p>
     <hr>
-    <p class="caption-text my-0">2009 - 2014</p>
+    <p class="caption-text my-0">2009 &#8594; 2014</p>
     <p class="title-text my-0">Certificat de fin d'études de l'école élémentaire</p>
     <p class="subtitle-text">École Élémentaire Publique "Jean Macé"</p>
 
@@ -138,16 +152,6 @@
         </div>
         <div class="row">
             <div class="col">
-                <p class="title-text my-0">Bootstrap</p>
-            </div>
-            <div class="col">
-                <div class="progress dark-blurred-background">
-                    <div class="progress-bar blurred-background" role="progressbar" style="width: 85%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
                 <p class="title-text my-0">AngularJS</p>
             </div>
             <div class="col">
@@ -172,7 +176,7 @@
     <div class="row row-cols-1">
         <div class="col row">
             <div class="col">
-                <p class="title-text my-0">Java</p>
+                <p class="title-text my-0">NodeJS</p>
             </div>
             <div class="col">
                 <div class="progress dark-blurred-background">
@@ -192,11 +196,21 @@
         </div>
         <div class="col row">
             <div class="col">
-                <p class="title-text my-0">NodeJS</p>
+                <p class="title-text my-0">Java</p>
             </div>
             <div class="col">
                 <div class="progress dark-blurred-background">
-                    <div class="progress-bar blurred-background" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col row">
+            <div class="col">
+                <p class="title-text my-0">Cloudflare</p>
+            </div>
+            <div class="col">
+                <div class="progress dark-blurred-background">
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
@@ -206,7 +220,7 @@
             </div>
             <div class="col">
                 <div class="progress dark-blurred-background">
-                    <div class="progress-bar blurred-background" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
@@ -226,21 +240,41 @@
     <div class="row row-cols-1">
         <div class="row">
             <div class="col">
-                <p class="title-text my-0">Swift</p>
+                <p class="title-text my-0">SwiftUI</p>
             </div>
             <div class="col">
                 <div class="progress dark-blurred-background">
-                    <div class="progress-bar blurred-background" role="progressbar" style="width: 75%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col">
-                <p class="title-text my-0">SwiftUI</p>
+                <p class="title-text my-0">Swift</p>
             </div>
             <div class="col">
                 <div class="progress dark-blurred-background">
-                    <div class="progress-bar blurred-background" role="progressbar" style="width: 90%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="title-text my-0">UIKit</p>
+            </div>
+            <div class="col">
+                <div class="progress dark-blurred-background">
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p class="title-text my-0">Flutter</p>
+            </div>
+            <div class="col">
+                <div class="progress dark-blurred-background">
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
@@ -274,7 +308,7 @@
             </div>
             <div class="col">
                 <div class="progress dark-blurred-background">
-                    <div class="progress-bar blurred-background" role="progressbar" style="width: 15%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
@@ -288,15 +322,25 @@
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                <p class="title-text my-0">Assembly</p>
+            </div>
+            <div class="col">
+                <div class="progress dark-blurred-background">
+                    <div class="progress-bar blurred-background" role="progressbar" style="width: 5%" aria-valuenow="5" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <h2 class="mb-4 pt-4">Competenze trasversali</h2>
     <div class="row">
         <div class="col-12 col-mb-6">
-            <p class="title-text my-0">Capacità collaborative</p>
+            <p class="title-text my-0">Capacità collaborative e di leadership</p>
         </div>
         <div class="col-12 col-mb-6">
-            <p class="description-text">Capacità gestionali e di collaborazione, pianificazione, adattabilità e ascolto acquisite con progetti scolastici e lavori di gruppo durante i quali, in svariate occasioni, sono stato selezionato come capogruppo con l'obbiettivo di guidare il gruppo e raggiungere il risultato prefissato.</p>
+            <p class="description-text">Gli anni di studio, i progetti svolti al di fuori del perimetro scolastico, le esperienze maturate in diversi ambiti lavorativi, mi hanno aiutato ad acquisire capacità gestionali, ad affinare l'abitudine al lavoro di gruppo, a sviluppare adattabilità, propensione all'ascolto e alla pianificazione. In molte di queste circostanze, i coordinatori dei vari progetti mi hanno indicato come capogruppo: ho così avuto modo di cimentarmi nell'esperienza di guida del team puntando al raggiungimento dell'obiettivo prefissato.</p>
         </div>
     </div>
     <hr>
@@ -305,7 +349,7 @@
             <p class="title-text my-0">Gestione dello stress</p>
         </div>
         <div class="col-12 col-mb-6">
-            <p class="description-text">Acquisite competenze legate al lavoro in condizioni e circostanze difficoltose e alla gestione dello stress tramite lezioni sul controllo di quest'ultimo svolte come PCTO in terza superiore.</p>
+            <p class="description-text">Durante il percorso di studi ho allenato l'attitudine al lavoro in situazioni di crisi. Apposite lezioni sul controllo dello stress, svolte in ambito PCTO, mi hanno fornito ulteriori elementi per imparare a gestirlo in circostanze di grande pressione.</p>
         </div>
     </div>
     <hr>
@@ -314,16 +358,7 @@
             <p class="title-text my-0">Autonomia</p>
         </div>
         <div class="col-12 col-mb-6">
-            <p class="description-text">Ottima capacità di lavoro in autonomia, anche sotto deadline. Riesco a mettermi nelle condizioni di svolgere le mie mansioni senza necessità di supervisione e sono in grado d'informarmi in autonomia.</p>
-        </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-12 col-mb-6">
-            <p class="title-text my-0">Rappresentante di classe</p>
-        </div>
-        <div class="col-12 col-mb-6">
-            <p class="description-text">Durante il mio percorso scolastico sono stato eletto rappresentante di classe, nei due anni in cui mi sono candidato, in 2<sup>a</sup> e 3<sup>a</sup> superiore.</p>
+            <p class="description-text">Ho sviluppato importanti capacità di lavoro in autonomia. Riesco a svolgere i compiti richiesti senza necessità di supervisione.</p>
         </div>
     </div>
 
@@ -335,7 +370,7 @@
     <p class="subtitle-text">Madrelingua</p>
     <hr>
     <p class="title-text my-0">Inglese</p>
-    <p class="subtitle-text">B2</p>
+    <p class="subtitle-text">B2 certificato</p>
 
     <h2 class="mb-4 pt-4">Attestati</h2>
     <p class="caption-text my-0">SICUREZZA</p>
@@ -343,7 +378,7 @@
     <p class="title-text my-0">Sicurezza rischio basso</p>
     <p class="title-text my-0">Sicurezza base</p>
     <hr>
-    <p class="caption-text my-0">ALTRO</p>
+    <p class="caption-text my-0">CERTIFICATI DI COMPETENZA</p>
     <p class="title-text my-0">Fusion 360</p>
     <p class="title-text my-0">Sviluppo web</p>
     <p class="title-text my-0">Arduino</p>
@@ -352,9 +387,131 @@
         <p class="text-center py-5 mb-0">Scopri di più su Linkedin</p>
     </a>
 
-    <footer class="text-center pb-5">
+    <footer class="text-center">
         <a style="font-size: 13px" href="https://garamante.it">garamante.it</a>
     </footer>
 </div>
+<img src="img/curriculum-bottom.webp" alt="young boy" class="footer-image">
 </body>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Generate stars
+    const starCount = (canvas.width + canvas.height) / 10;
+    const stars = [];
+    for (let i = 0; i < starCount; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            xDirection: (Math.random() < 0.5 ? -1 : 1),
+            yDirection: (Math.random() < 0.5 ? -1 : 1),
+            size: Math.random(),
+            brightness: Math.random(),
+            new: false
+        });
+    }
+
+    // Shooting stars
+    const shootingStars = [];
+
+    // Draw stars
+    function draw() {
+        // Add new shooting star
+        if (Math.random() > 0.995) {
+            shootingStars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                xDirection: (Math.random() < 0.5 ? -1 : 1),
+                yDirection: (Math.random() < 0.5 ? -1 : 1),
+                length: Math.random() * 80 + 10,
+                brightness: Math.random() * 0.5,
+            });
+        }
+
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Draw stars
+        for (let i = 0; i < starCount; i++) {
+            const star = stars[i];
+            ctx.fillStyle = `rgba(255, 255, 255, ${star.brightness})`;
+            ctx.beginPath();
+            ctx.arc(star.x, star.y, star.size, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        // Draw shooting stars
+        for (let i = 0; i < shootingStars.length; i++) {
+            const shootingStar = shootingStars[i];
+            ctx.strokeStyle = `rgba(255, 255, 255, ${shootingStar.brightness})`;
+            ctx.beginPath();
+            ctx.moveTo(shootingStar.x, shootingStar.y);
+            ctx.lineTo(shootingStar.x + shootingStar.length * shootingStar.xDirection, shootingStar.y + shootingStar.length * shootingStar.yDirection);
+            ctx.stroke();
+        }
+
+        // Move stars
+        for (let i = 0; i < starCount; i++) {
+            const star = stars[i];
+
+            star.x += star.xDirection * Math.random() * 0.05 - (canvas.width / 2 - star.x) / 10000;
+            star.y += star.yDirection * Math.random() * 0.05 - (canvas.width / 2 - star.y) / 10000;
+
+            if (star.new) {
+                star.brightness += 0.001;
+
+                if (star.brightness >= 0.75) {
+                    star.new = false;
+                }
+            }
+            else {
+                star.brightness -= 0.001;
+            }
+
+
+            if (star.x < 0) {
+                star.x = canvas.width;
+            } else if (star.x > canvas.width) {
+                star.x = 0;
+            }
+            if (star.y < 0) {
+                star.y = canvas.height;
+            } else if (star.y > canvas.height) {
+                star.y = 0;
+            }
+
+            if (star.brightness <= 0 || star.x <= 0 || star.x >= canvas.width || star.y <= 0 || star.y >= canvas.height) {
+                stars[i] = {
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    xDirection: (Math.random() < 0.5 ? -1 : 1),
+                    yDirection: (Math.random() < 0.5 ? -1 : 1),
+                    size: Math.random(),
+                    brightness: 0,
+                    new: true
+                };
+            }
+        }
+
+        // Move shooting stars
+        for (let i = 0; i < shootingStars.length; i++) {
+            const shootingStar = shootingStars[i];
+
+            shootingStar.x += shootingStar.xDirection * 5;
+            shootingStar.y += shootingStar.yDirection * 5;
+            shootingStar.brightness -= Math.random() / 100;
+
+            if (shootingStar.brightness <= 0) {
+                shootingStars.splice(i, 1);
+            }
+        }
+
+        requestAnimationFrame(draw);
+    }
+
+    requestAnimationFrame(draw);
+</script>
 </html>

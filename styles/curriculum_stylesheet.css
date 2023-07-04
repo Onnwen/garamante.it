@@ -21,7 +21,7 @@ h2 {
 }
 
 .contact-card {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px) brightness(2);
     -webkit-backdrop-filter: blur(10px) brightness(2);
     border-radius: 15px;
@@ -29,13 +29,13 @@ h2 {
 }
 
 body {
-    background-image: url(../img/curriculum-bg.webp);
-    backdrop-filter: brightness(35%);
-    -webkit-backdrop-filter: brightness(35%);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
+    /*background-image: url(../img/curriculum-bg.webp);*/
+    /*backdrop-filter: brightness(35%);*/
+    /*-webkit-backdrop-filter: brightness(35%);*/
+    /*background-size: cover;*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: center center;*/
+    /*background-attachment: fixed;*/
     width: 100vw;
     min-height: 100vh;
     padding-top: 30px;
@@ -53,9 +53,23 @@ body {
 }
 
 .title-text {
+    width: 100%;
     font-size: 22px;
     margin-top: 15px !important;
     margin-bottom: 5px !important;
+}
+
+.mark-text {
+    font-size: 18px;
+    font-weight: 400 !important;
+    letter-spacing: 2px;
+    opacity: 70%;
+    float: right;
+    vertical-align: center;
+}
+
+.row.contact-card {
+    align-items: center;;
 }
 
 .info-text {
@@ -66,9 +80,9 @@ body {
 
 .subtitle-text {
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 2px;
-    opacity: 50%;
+    opacity: 60%;
     font-weight: 400 !important;
     margin-top: 0;
     margin-bottom: 0;
@@ -99,6 +113,16 @@ hr {
     hyphens: auto;
     margin-top: 15px;
     margin-bottom: 0;
+    font-size: 18px;
+}
+
+#canvas {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -100;
 }
 
 .progress {
@@ -106,16 +130,16 @@ hr {
 }
 
 .blurred-background {
-    background-color: rgba(255, 255, 255, 0.75);
+    background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(5px) brightness(5);
     -webkit-backdrop-filter: blur(5px) brightness(5);
 }
 
 .dark-blurred-background {
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.075);
 }
 
 a, a:visited, a:link {
@@ -135,4 +159,13 @@ a:hover {
 a:active {
     opacity: 0.8;
     font-weight: bold;
+}
+
+.footer-image {
+    height: auto;
+    width: 100%;
+    max-width: 800px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
