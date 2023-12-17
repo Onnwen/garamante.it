@@ -1,11 +1,19 @@
 {
   "dependencies": {
-    "@flodlc/nebula": "^1.0.56",
-    "atropos": "^1.0.2",
-    "bootstrap": "^5.2.2",
-    "bootstrap-icons": "^1.10.1",
-    "jquery": "^3.6.1",
-    "jquery.session": "^1.0.0",
-    "prismjs": "^1.29.0"
+    "@heroicons/react": "^2.0.18",
+    "framer-motion": "^10.16.14",
+    "prettier": "^3.1.0",
+    "react": "^18.2.0",
+    "react-bootstrap-icons": "^1.10.3",
+    "react-dom": "^18.2.0"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": false,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "quoteProps": "as-needed",
+    "bracketSameLine": true,
+    "printWidth": 10000
   }
 }
