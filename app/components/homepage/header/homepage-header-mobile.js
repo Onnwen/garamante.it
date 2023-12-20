@@ -3,7 +3,7 @@ import { motion, useScroll } from "framer-motion"
 import { ChevronUp } from "react-bootstrap-icons"
 import { useRef } from "react"
 
-export default function MobileHome() {
+export default function HomepageHeaderMobile() {
     const ref = useRef(null)
     const { scrollYProgress } = useScroll({ target: ref })
 

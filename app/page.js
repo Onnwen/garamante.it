@@ -8,9 +8,9 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 import PortfolioButton from "@/app/icons/portfolio-icon"
 import { Github, Instagram, Linkedin, StackOverflow, Twitter } from "react-bootstrap-icons"
-import MobileHome from "@/app/adaptive/mobile/mobile-home"
-import MobilePage from "@/app/adaptive/mobile/mobile-page"
-import Background from "@/app/background"
+import HomepageHeaderMobile from "@/app/components/homepage/header/homepage-header-mobile"
+import MobilePage from "@/app/components/mobile/mobile-page"
+import Background from "@/app/other/background"
 
 export default function Home() {
     const curve = {
@@ -174,12 +174,13 @@ export default function Home() {
         },
     }
 
-    return <Background />
-
     return (
         <>
             {/* Desktop */}
             <main className="flex min-h-screen flex-col items-center justify-between md:p-24 my-auto h-screen relative hidden md:block">
+                <div className={"absolute top-0 left-0 w-full h-full"}>
+                    <Background />
+                </div>
                 <div className={"container mx-auto absolute top-1/2 -translate-y-1/2 select-none"}>
                     <div className={"flex place-items-center mx-20"}>
                         <motion.div

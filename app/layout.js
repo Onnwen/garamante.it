@@ -7,7 +7,7 @@ const montserrat = Montserrat({
     subsets: ["latin-ext"],
 })
 export const newYorkFont = localFont({
-    src: "/NewYork.otf",
+    src: "/fonts/NewYork.otf",
     variable: "--font-newyork",
     subsets: ["latin-ext"],
 })

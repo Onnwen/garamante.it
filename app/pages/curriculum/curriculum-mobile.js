@@ -1,7 +1,7 @@
 import { newYorkFont } from "@/app/layout"
 import { motion } from "framer-motion"
 
-export default function MobileCV() {
+export default function CurriculumMobile() {
     return (
         <div className="min-h-screen relative snap-always snap-center">
             <div className="absolute top-[10%] w-full">
