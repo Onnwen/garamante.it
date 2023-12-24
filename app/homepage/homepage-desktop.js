@@ -12,7 +12,7 @@ import MediaQuery from "react-responsive"
 export default function HomepageDesktop() {
     const curve = {
         type: "spring",
-        stiffness: 50,
+        stiffness: 75,
         mass: 1,
         damping: 10,
     }
@@ -191,6 +191,7 @@ export default function HomepageDesktop() {
                         whileHover={!nameExpanded ? "hover" : "nameExpandedHover"}
                         expanded="expanded"
                         whileTap={!nameExpanded ? "tap" : "nameExpandedTap"}
+                        exit="initial"
                         onAnimationComplete={() => {
                             setInitialCompleted(true)
                         }}>
@@ -269,7 +270,7 @@ export default function HomepageDesktop() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to={"/contact"}>
+                                <Link to={"/contacts"}>
                                     <motion.div
                                         initial="initial"
                                         animate="animate"

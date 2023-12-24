@@ -1,5 +1,5 @@
-import HomepageHeaderMobile from "@/app/components/homepage/header/homepage-header-mobile"
-import CurriculumMobile from "@/app/pages/curriculum/curriculum-mobile"
+import HomepageHeaderMobile from "@/app/homepage/components/mobile/homepage-header-mobile"
+import CurriculumMobile from "@/app/curriculum/curriculum-mobile"
 
 export default function HomepageMobile() {
     return (
