@@ -12,8 +12,16 @@ import MediaQuery from "react-responsive"
 export default function HomepageDesktop() {
     const curve = {
         type: "spring",
-        stiffness: 75,
+        stiffness: 50,
+        mass: 1,
         damping: 10,
+    }
+
+    const menuTransition = {
+        type: "spring",
+        damping: 15,
+        mass: 2,
+        stiffness: 75,
     }
 
     const [nameExpanded, setNameExpanded] = useState(false)
@@ -54,9 +62,9 @@ export default function HomepageDesktop() {
             x: 40,
         },
         expanded: {
-            scale: 0.8,
+            scale: 0.5,
             opacity: 0,
-            x: -100,
+            x: -175,
         },
     }
 
@@ -176,7 +184,7 @@ export default function HomepageDesktop() {
             <div className={"absolute top-1/2 -translate-y-1/2 w-screen"}>
                 <div className={"select-none flex place-items-center container mx-auto"}>
                     <motion.div
-                        className={"cursor-pointer"}
+                        className={"cursor-pointer relative"}
                         onClick={() => setNameExpanded(!nameExpanded)}
                         initial="initial"
                         animate={nameExpanded ? "expanded" : "animate"}
@@ -194,16 +202,14 @@ export default function HomepageDesktop() {
                                     variants={headerTextVariants}
                                     transition={{
                                         duration: 0.5,
-                                        type: "spring",
-                                        stiffness: 100,
+                                        ...curve,
                                     }}>
                                     <h1>Cassitto L'Hostis</h1>
                                     <motion.div
                                         variants={headerTextChevronVariants}
                                         transition={{
                                             duration: 0.5,
-                                            type: "spring",
-                                            stiffness: 100,
+                                            ...curve,
                                         }}>
                                         <ChevronRightIcon className="ms-4 h-5 w-5 mt-0.5" />
                                     </motion.div>
@@ -233,10 +239,8 @@ export default function HomepageDesktop() {
                                         variants={menuItemsVariants}
                                         className="cursor-pointer flex place-items-center place-content-center"
                                         transition={{
-                                            duration: 0.5,
                                             delay: !initialCompleted ? 0.4 : 0,
-                                            type: "spring",
-                                            stiffness: 100,
+                                            ...menuTransition,
                                         }}>
                                         applicazioni
                                         <motion.div variants={menuItemsIconVariants}>
@@ -254,10 +258,8 @@ export default function HomepageDesktop() {
                                         variants={menuItemsVariants}
                                         className="cursor-pointer flex place-items-center place-content-center"
                                         transition={{
-                                            duration: 0.5,
                                             delay: !initialCompleted ? 0.6 : 0,
-                                            type: "spring",
-                                            stiffness: 100,
+                                            ...menuTransition,
                                         }}>
                                         curriculum
                                         <motion.div variants={menuItemsIconVariants}>
@@ -275,10 +277,8 @@ export default function HomepageDesktop() {
                                         variants={menuItemsVariants}
                                         className="cursor-pointer flex place-items-center place-content-center origin-center"
                                         transition={{
-                                            duration: 0.5,
                                             delay: !initialCompleted ? 0.8 : 0,
-                                            type: "spring",
-                                            stiffness: 100,
+                                            ...menuTransition,
                                         }}>
                                         contatti
                                         <motion.div variants={menuItemsIconVariants}>
